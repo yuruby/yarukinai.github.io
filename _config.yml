@@ -15,6 +15,12 @@ actors:
     image_url: /images/actors/tetuo41.jpeg
     name: tetuo41
     url: https://twitter.com/tetuo41
+  tsunacan:
+    image_url: /images/actors/tsunacan.jpg
+    name: tsunacan
+  adachi:
+    image_url: /images/actors/adachi.jpg
+    name: adachi
 author: tetuo41
 description: yarukinai radio
 description_long: So yarukinai radio
