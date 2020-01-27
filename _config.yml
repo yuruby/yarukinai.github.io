@@ -21,6 +21,10 @@ actors:
   adachi:
     image_url: /images/actors/adachi.jpg
     name: adachi
+  morizyun:
+    image_url: /images/actors/morizyun.png
+    name: morizyun
+    url: https://twitter.com/zyunnosuke
 author: tetuo41
 description: yarukinai radio
 description_long: So yarukinai radio
