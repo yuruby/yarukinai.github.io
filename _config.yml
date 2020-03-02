@@ -25,6 +25,10 @@ actors:
     image_url: /images/actors/morizyun.png
     name: morizyun
     url: https://twitter.com/zyunnosuke
+  chikuwabu:
+    image_url: /images/actors/chikuwabu.jpg
+    name: chikuwabu
+    url: https://twitter.com/_chikuwa_bu_
 author: tetuo41
 description: yarukinai radio
 description_long: So yarukinai radio
