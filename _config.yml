@@ -29,6 +29,9 @@ actors:
     image_url: /images/actors/chikuwabu.jpg
     name: chikuwabu
     url: https://twitter.com/_chikuwa_bu_
+  yuuki:
+    image_url: /images/actors/yuuki.jpg
+    name: yuuki
 author: tetuo41
 description: yarukinai radio
 description_long: So yarukinai radio
