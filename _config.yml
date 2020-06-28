@@ -32,6 +32,11 @@ actors:
   yuuki:
     image_url: /images/actors/yuuki.jpg
     name: yuuki
+  z_ohnami:
+    image_url: /images/actors/z_ohnami.jpg
+    name: z_ohnami
+    url: https://twitter.com/z_ohnami
+
 author: tetuo41
 description: yarukinai radio
 description_long: So yarukinai radio
