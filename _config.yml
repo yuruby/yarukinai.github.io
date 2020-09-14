@@ -36,6 +36,10 @@ actors:
     image_url: /images/actors/z_ohnami.jpg
     name: z_ohnami
     url: https://twitter.com/z_ohnami
+  mktakuya:
+    image_url: /images/actors/mktakuya.jpg
+    name: mktakuya
+    url: https://twitter.com/mktakuya
 
 author: tetuo41
 description: yarukinai radio
