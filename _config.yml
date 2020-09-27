@@ -40,6 +40,10 @@ actors:
     image_url: /images/actors/mktakuya.jpg
     name: mktakuya
     url: https://twitter.com/mktakuya
+  kgmyshin:
+    image_url: /images/actors/kgmyshin.jpg
+    name: kgmyshin
+    url: https://twitter.com/kgmyshin
 
 author: tetuo41
 description: yarukinai radio
