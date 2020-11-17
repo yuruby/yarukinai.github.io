@@ -17,28 +17,17 @@
             </div>
           </header>
           <section class="card-body markdown">
-            {% if page.apple_podcast_url %}
-              <iframe
-                src="{{page.apple_podcast_url}}"
-                height="175px"
-                frameborder="0"
-                sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
-                allow="autoplay *; encrypted-media *;"
-                style="width: 100%; max-width: 928px; overflow: hidden; border-radius: 10px; background: transparent;">
-              </iframe>
-            {% else %}
-              <p>
-                <audio
-                  class="mejs-player"
-                  controls=""
-                  data-mejsoptions='{"alwaysShowControls": true, "alwaysShowHours": true, "enableAutosize": true, "features": ["playpause", "progress", "current", "duration", "volume", "speed"]}'
-                  preload="auto"
-                  src="{{ page.audio_file_path | prepend:site.github.url }}"
-                  width="100%"
-                >
-                </audio>
-              </p>
-　　　　　　　{% endif %}
+            <p>
+              <audio
+                class="mejs-player"
+                controls=""
+                data-mejsoptions='{"alwaysShowControls": true, "alwaysShowHours": true, "enableAutosize": true, "features": ["playpause", "progress", "current", "duration", "volume", "speed"]}'
+                preload="auto"
+                src="{{ page.audio_file_path | prepend:site.github.url }}"
+                width="100%"
+              >
+              </audio>
+            </p>
             <p class="text-right">
               <small>
                 <a href="{{ page.audio_file_path | prepend:site.github.url }}">MP3ファイルをダウンロード</a>
