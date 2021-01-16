@@ -46,8 +46,8 @@ actors:
     url: https://twitter.com/kgmyshin
 
 author: tetuo41
-description: yarukinai radio
-description_long: So yarukinai radio
+description: Yarukinai.fmは、アラフォーのおじさんエンジニアたちと20代の若者エンジニアが雑談ベースで話すポッドキャストです。
+description_long: アラフォーのおじさんエンジニアたちと20代の若者エンジニアが雑談ベースで話すポッドキャストです。
 email: tetuo41@gmail.com
 exclude:
   - docker
