@@ -48,6 +48,10 @@ actors:
     image_url: /images/actors/umekun123.jpg
     name: umekun123
     url: https://twitter.com/umekun123
+  nagatanuen:
+    image_url: /images/actors/nagatanuen.jpg
+    name: nagatanuen
+    url: https://twitter.com/nagatanuen
 
 author: tetuo41
 description: Yarukinai.fmは、アラフォーのおじさんエンジニアたちと20代の若者エンジニアが雑談ベースで話すポッドキャストです。
