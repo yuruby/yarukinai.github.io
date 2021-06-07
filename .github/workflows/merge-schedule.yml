@@ -1,10 +1,9 @@
 name: Merge Schedule
 on:
   pull_request:
-    types:
-      - opened
-      - edited
-      - synchronize
+    - opened
+    - edited
+    - synchronize
   schedule:
     - cron: 0,15,30,45 * * * *
 
