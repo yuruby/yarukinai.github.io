@@ -56,6 +56,10 @@ actors:
     image_url: /images/actors/darquro.jpg
     name: darquro
     url: https://twitter.com/darquro
+  flada:
+    image_url: /images/actors/flada.jpg
+    name: flada
+    url: https://twitter.com/flada_auxv
 
 author: tetuo41
 description: Yarukinai.fmは、アラフォーのおじさんエンジニアたちと30代のエンジニアが雑談ベースで話すポッドキャストです。
