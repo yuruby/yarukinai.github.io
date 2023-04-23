@@ -60,6 +60,10 @@ actors:
     image_url: /images/actors/flada.jpg
     name: flada
     url: https://twitter.com/flada_auxv
+  toshiemon18:
+    image_url: /images/actors/toshiemon18.jpg
+    name: toshiemon18
+    url: https://twitter.com/toshiemon18
 
 author: tetuo41
 description: Yarukinai.fmは、アラフォーのおじさんエンジニアたちと30代のエンジニアが雑談ベースで話すポッドキャストです。
