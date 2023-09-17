@@ -64,6 +64,10 @@ actors:
     image_url: /images/actors/toshiemon18.jpg
     name: toshiemon18
     url: https://twitter.com/toshiemon18
+  iwashi:
+    image_url: /images/actors/iwashi.jpg
+    name: iwashi
+    url: https://twitter.com/iwashi86
 
 author: tetuo41
 description: Yarukinai.fmは、アラフォーのおじさんエンジニアたちと30代のエンジニアが雑談ベースで話すポッドキャストです。 listen > https://listen.style/p/yarukinai-fm?CuosEbmN
