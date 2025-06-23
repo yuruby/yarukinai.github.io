@@ -6,3 +6,11 @@
     display: table;
   }
 }
+
+@mixin respond-to($screen) {
+  @if $screen == mobile {
+    @media (max-width: $width-screen-extra-small-maximum) {
+      @content;
+    }
+  }
+}

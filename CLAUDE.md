@@ -1,8 +1,12 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 # Yarukinai.fm - Jekyll Podcast Website
 
 ## Project Overview
 
-Yarukinai.fm is a Japanese podcast website built with Jekyll and hosted on GitHub Pages. The site serves as a platform for a tech podcast featuring Japanese engineers discussing various topics. The project focuses on simplicity and automated deployment through GitHub Pages.
+Yarukinai.fm is a Japanese podcast website built with Jekyll and hosted on GitHub Pages at https://yarukinai.fm/. The site serves as a platform for a tech podcast featuring Japanese engineers discussing various topics. The project focuses on simplicity and automated deployment through GitHub Pages.
 
 ## Architecture
 
@@ -32,9 +36,15 @@ Yarukinai.fm is a Japanese podcast website built with Jekyll and hosted on GitHu
 └── docker/             # Development containerization
 ```
 
-## Development Workflow
+## Development Commands
 
-### Local Development Setup
+### Essential Commands
+- **Start development server**: `docker-compose up` (recommended) or `bundle exec jekyll serve --future --incremental`
+- **Build site**: `bundle exec jekyll build`
+- **Install dependencies**: `bundle install`
+- **Serve with future posts**: `bundle exec jekyll serve --future`
+
+### Development Setup
 
 1. **Docker-based Development** (Recommended):
    ```bash
@@ -112,7 +122,7 @@ blocks/
 ## Deployment Process
 
 ### GitHub Pages Integration
-- **Automatic Deployment**: Pushes to `master` branch trigger builds
+- **Automatic Deployment**: Pushes to `master` branch trigger builds and deploy to https://yarukinai.fm/
 - **GitHub Actions**: No custom CI/CD - relies on GitHub Pages Jekyll processing
 - **Domain**: Custom domain configured via CNAME file
 
@@ -159,17 +169,24 @@ blocks/
 3. Use defined variables for consistency
 4. Test responsive behavior
 
-### Local Testing
-```bash
-# Start development server
-docker-compose up
+## Architecture Notes
 
-# Build site locally
-bundle exec jekyll build
+### Jekyll Integration
+- Uses GitHub Pages with automatic deployment on push to `master` branch
+- No custom build process or GitHub Actions - relies on GitHub Pages' built-in Jekyll processing
+- Posts are automatically converted to HTML using the `article.html` layout
+- RSS feed generation is handled by `feed.xml` template
 
-# Serve with future posts
-bundle exec jekyll serve --future
-```
+### Content Management
+- Episodes are stored as markdown files in `_posts/` directory
+- Actor/host data is centralized in `_config.yml` under the `actors` key
+- Each episode references actors by their ID, which maps to their profile data
+- Audio files are hosted externally (SoundCloud) and referenced via URL
+
+### Styling System
+- SCSS files are organized into modular blocks following BEM-like conventions
+- Import order matters: reset → mixins → variables → components (alphabetical)
+- Responsive design uses variables defined in `_variables.scss`
 
 ## Configuration Notes
 
