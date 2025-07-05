@@ -1,0 +1,27 @@
+{
+  "name": "yarukinai-episode-generator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Automated episode generator for Yarukinai.fm podcast",
+  "scripts": {
+    "create-episode": "tsx scripts/create-episode.ts",
+    "build": "tsc",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^20.14.2",
+    "tsx": "^4.15.4",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "date-fns": "^3.6.0",
+    "fs-extra": "^11.2.0",
+    "simple-git": "^3.24.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.15.6"
+}

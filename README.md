@@ -29,6 +29,27 @@ bundle exec jekyll serve --future --incremental
 
 ### 新しいエピソードの追加
 
+#### 自動生成（推奨）
+
+```bash
+# 初回のみ：TypeScript環境のセットアップ
+pnpm install
+
+# 新しいエピソードを生成
+pnpm create-episode
+
+# カスタムタイトルで生成
+pnpm create-episode "カスタムタイトル"
+```
+
+このコマンドは以下を自動実行します：
+- 最新エピソード番号の検出と次回番号の計算
+- 次の月曜日の日付を自動設定
+- 新しいGitブランチ `add/yarukinai-{番号}` を作成
+- テンプレートからエピソードファイルを生成
+
+#### 手動作成
+
 1. `_posts/` ディレクトリに `YYYY-MM-DD-{episode_number}.md` 形式でファイルを作成
 2. 必要なfrontmatterを設定（詳細は [CLAUDE.md](CLAUDE.md) を参照）
 3. コミット・プッシュで自動デプロイ
