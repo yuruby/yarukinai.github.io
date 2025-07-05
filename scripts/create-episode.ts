@@ -15,6 +15,74 @@ interface EpisodeData {
   description: string;
   filename: string;
   branchName: string;
+  actorIds: string[];
+}
+
+interface CliOptions {
+  actors?: string;
+  title?: string;
+  listActors?: boolean;
+  help?: boolean;
+}
+
+interface ActorConfig {
+  [key: string]: {
+    image_url: string;
+    name: string;
+    url?: string;
+  };
+}
+
+async function loadActorsConfig(): Promise<ActorConfig> {
+  try {
+    const configPath = path.join(process.cwd(), '_config.yml');
+    const configContent = await fs.readFile(configPath, 'utf-8');
+    
+    // Simple YAML parsing for actors section
+    const actorsMatch = configContent.match(/^actors:\s*\n((?:[ ]{2}[^\n]*\n?)*?)(?=\n\w|\n$|$)/m);
+    if (!actorsMatch) {
+      throw new Error('No actors section found in _config.yml');
+    }
+    
+    const actorsSection = actorsMatch[1];
+    const actors: ActorConfig = {};
+    
+    const actorMatches = actorsSection.matchAll(/^  (\w+):\s*\n((?:    [^\n]*\n?)*)/gm);
+    for (const match of actorMatches) {
+      const actorId = match[1];
+      const actorData = match[2];
+      
+      const imageMatch = actorData.match(/^\s*image_url:\s*(.+)$/m);
+      const nameMatch = actorData.match(/^\s*name:\s*(.+)$/m);
+      const urlMatch = actorData.match(/^\s*url:\s*(.+)$/m);
+      
+      if (imageMatch && nameMatch) {
+        actors[actorId] = {
+          image_url: imageMatch[1].trim(),
+          name: nameMatch[1].trim(),
+          url: urlMatch ? urlMatch[1].trim() : undefined
+        };
+      }
+    }
+    
+    return actors;
+  } catch (error) {
+    console.error('❌ Error loading actors config:', error);
+    process.exit(1);
+  }
+}
+
+async function validateActors(actorIds: string[], availableActors: ActorConfig): Promise<void> {
+  const invalidActors = actorIds.filter(id => !availableActors[id]);
+  
+  if (invalidActors.length > 0) {
+    console.error(`❌ Invalid actor IDs: ${invalidActors.join(', ')}`);
+    console.log('\nAvailable actors:');
+    Object.keys(availableActors).forEach(id => {
+      console.log(`  - ${id} (${availableActors[id].name})`);
+    });
+    process.exit(1);
+  }
 }
 
 async function getLatestEpisodeNumber(): Promise<number> {
@@ -65,12 +133,17 @@ async function loadTemplate(): Promise<string> {
   }
 }
 
+function generateActorIdsYaml(actorIds: string[]): string {
+  return actorIds.map(id => `  - ${id}`).join('\n');
+}
+
 function replaceTemplateVariables(template: string, data: EpisodeData): string {
   return template
     .replace(/{{EPISODE_NUMBER}}/g, data.episodeNumber.toString())
     .replace(/{{DATE}}/g, data.date)
     .replace(/{{TITLE}}/g, data.title)
-    .replace(/{{DESCRIPTION}}/g, data.description);
+    .replace(/{{DESCRIPTION}}/g, data.description)
+    .replace(/{{ACTOR_IDS}}/g, generateActorIdsYaml(data.actorIds));
 }
 
 async function checkGitStatus(): Promise<void> {
@@ -127,16 +200,88 @@ async function createEpisodeFile(data: EpisodeData, content: string): Promise<vo
   }
 }
 
+function parseCommandLineArgs(): CliOptions {
+  const args = process.argv.slice(2);
+  const options: CliOptions = {};
+  
+  for (let i = 0; i < args.length; i++) {
+    const arg = args[i];
+    
+    if (arg === '--actors' || arg === '-a') {
+      options.actors = args[++i];
+    } else if (arg === '--title' || arg === '-t') {
+      options.title = args[++i];
+    } else if (arg === '--list-actors') {
+      options.listActors = true;
+    } else if (arg === '--help' || arg === '-h') {
+      options.help = true;
+    } else if (!arg.startsWith('-') && !options.title) {
+      // Backward compatibility: first non-flag argument is title
+      options.title = arg;
+    }
+  }
+  
+  return options;
+}
+
+function showHelp(): void {
+  console.log('Episode Generator for Yarukinai.fm');
+  console.log('');
+  console.log('Usage:');
+  console.log('  pnpm create-episode [options] [title]');
+  console.log('');
+  console.log('Options:');
+  console.log('  -a, --actors <ids>      Comma-separated actor IDs (default: tetuo41,sugaishun)');
+  console.log('  -t, --title <title>     Episode title');
+  console.log('  --list-actors           List available actors');
+  console.log('  -h, --help              Show this help');
+  console.log('');
+  console.log('Examples:');
+  console.log('  pnpm create-episode');
+  console.log('  pnpm create-episode "カスタムタイトル"');
+  console.log('  pnpm create-episode --actors tetuo41,snowlong --title "カスタムタイトル"');
+  console.log('  pnpm create-episode --list-actors');
+}
+
+async function listActors(): Promise<void> {
+  const actors = await loadActorsConfig();
+  console.log('Available actors:');
+  Object.entries(actors).forEach(([id, actor]) => {
+    console.log(`  ${id} - ${actor.name}${actor.url ? ` (${actor.url})` : ''}`);
+  });
+}
+
 async function main(): Promise<void> {
   try {
-    // Get custom title from command line argument
-    const customTitle = process.argv[2];
+    const options = parseCommandLineArgs();
+    
+    if (options.help) {
+      showHelp();
+      return;
+    }
+    
+    if (options.listActors) {
+      await listActors();
+      return;
+    }
+    
+    // Load actors configuration
+    const availableActors = await loadActorsConfig();
+    
+    // Parse and validate actor IDs
+    const defaultActors = ['tetuo41', 'sugaishun'];
+    const actorIds = options.actors 
+      ? options.actors.split(',').map(id => id.trim())
+      : defaultActors;
+    
+    await validateActors(actorIds, availableActors);
     
     console.log('🔍 最新エピソード番号を検出中...');
     const latestNumber = await getLatestEpisodeNumber();
     const nextNumber = latestNumber + 1;
     
     console.log(`✅ 最新エピソード番号を検出: ${latestNumber}`);
+    console.log(`👥 出演者: ${actorIds.join(', ')}`);
     
     const nextDate = getNextMondayDate();
     console.log(`📅 次の月曜日: ${nextDate}`);
@@ -144,10 +289,11 @@ async function main(): Promise<void> {
     const episodeData: EpisodeData = {
       episodeNumber: nextNumber,
       date: nextDate,
-      title: customTitle || generateDefaultTitle(nextNumber),
+      title: options.title || generateDefaultTitle(nextNumber),
       description: generateDefaultDescription(nextNumber),
       filename: `${nextDate}-${nextNumber}.md`,
-      branchName: `add/yarukinai-${nextNumber}`
+      branchName: `add/yarukinai-${nextNumber}`,
+      actorIds
     };
     
     // Check git status

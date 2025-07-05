@@ -1,7 +1,6 @@
 ---
 actor_ids:
-  - tetuo41
-  - sugaishun
+{{ACTOR_IDS}}
 audio_file_url: # TODO: SoundCloudのURLを追加
 audio_file_size: # TODO: ファイルサイズを追加
 date: {{DATE}} 07:00:00 +0900
