@@ -44,6 +44,11 @@ Yarukinai.fm is a Japanese podcast website built with Jekyll and hosted on GitHu
 - **Install dependencies**: `bundle install`
 - **Serve with future posts**: `bundle exec jekyll serve --future`
 
+### Episode Generation Commands
+- **Install TypeScript dependencies**: `pnpm install`
+- **Create new episode**: `pnpm create-episode`
+- **Create episode with custom title**: `pnpm create-episode "カスタムタイトル"`
+
 ### Development Setup
 
 1. **Docker-based Development** (Recommended):
@@ -116,6 +121,7 @@ blocks/
 ├── _header.scss        # Site header
 ├── _footer.scss        # Site footer
 ├── _markdown.scss      # Content typography
+├── _pagination.scss    # Pagination navigation styling
 └── _responsive.scss    # Mobile responsiveness
 ```
 
@@ -153,6 +159,14 @@ blocks/
 ## Common Development Tasks
 
 ### Adding New Episodes
+
+#### Automated Method (Recommended)
+1. Run `pnpm install` to install dependencies (first time only)
+2. Run `pnpm create-episode` to automatically generate next episode
+3. Edit the generated file in `_posts/` to add content
+4. Commit and push the new branch to trigger deployment
+
+#### Manual Method
 1. Create new markdown file in `_posts/` with proper naming convention
 2. Add required frontmatter fields (audio_file_url, actor_ids, etc.)
 3. Structure content with "話したこと" (Topics) and "話してる人" (Speakers) sections
@@ -182,11 +196,13 @@ blocks/
 - Actor/host data is centralized in `_config.yml` under the `actors` key
 - Each episode references actors by their ID, which maps to their profile data
 - Audio files are hosted externally (SoundCloud) and referenced via URL
+- Pagination displays 20 episodes per page using `paginator.posts` in index.html
 
 ### Styling System
 - SCSS files are organized into modular blocks following BEM-like conventions
 - Import order matters: reset → mixins → variables → components (alphabetical)
 - Responsive design uses variables defined in `_variables.scss`
+- `respond-to(mobile)` mixin available for responsive breakpoints
 
 ## Configuration Notes
 
@@ -197,9 +213,16 @@ blocks/
 - **Exclusions**: Development files excluded from builds
 
 ### Dependencies
-- **Minimal**: Only `github-pages` gem required
-- **No Node.js**: Pure Ruby/Jekyll stack
+- **Jekyll**: `github-pages` and `jekyll-paginate` gems required for site generation
+- **Node.js**: TypeScript environment for episode generation scripts
 - **CDN Assets**: MediaElement.js loaded from CDN
+- **Pagination**: 20 episodes per page using jekyll-paginate plugin
+
+### Episode Generation System
+- **TypeScript**: Automated episode creation with `scripts/create-episode.ts`
+- **Template**: Episode template in `_templates/episode-template.md`
+- **Git Integration**: Automatic branch creation following `add/yarukinai-{number}` pattern
+- **Dependencies**: `date-fns`, `fs-extra`, `simple-git` for date calculation and file operations
 
 ## Monitoring & Analytics
 
