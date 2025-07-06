@@ -5,6 +5,7 @@
   "description": "Automated episode generator for Yarukinai.fm podcast",
   "scripts": {
     "create-episode": "tsx scripts/create-episode.ts",
+    "update-audio": "tsx scripts/update-audio-info.ts",
     "build": "tsc",
     "type-check": "tsc --noEmit"
   },
@@ -16,6 +17,7 @@
   },
   "dependencies": {
     "date-fns": "^3.6.0",
+    "fast-xml-parser": "^4.4.0",
     "fs-extra": "^11.2.0",
     "simple-git": "^3.24.0"
   },
