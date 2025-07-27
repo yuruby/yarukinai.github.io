@@ -48,6 +48,9 @@ Yarukinai.fm is a Japanese podcast website built with Jekyll and hosted on GitHu
 - **Install TypeScript dependencies**: `pnpm install`
 - **Create new episode**: `pnpm create-episode`
 - **Create episode with custom title**: `pnpm create-episode "カスタムタイトル"`
+- **TypeScript type checking**: `pnpm type-check`
+- **Build TypeScript**: `pnpm build`
+- **Update audio info**: `pnpm update-audio`
 
 ### Development Setup
 
@@ -223,6 +226,9 @@ blocks/
 - **Template**: Episode template in `_templates/episode-template.md`
 - **Git Integration**: Automatic branch creation following `add/yarukinai-{number}` pattern
 - **Dependencies**: `date-fns`, `fs-extra`, `simple-git` for date calculation and file operations
+- **Actor Management**: Supports selecting specific actors with `--actors` flag
+- **Auto-dating**: Automatically sets episode date to next Monday
+- **Episode Numbering**: Auto-detects latest episode number and increments
 
 ## Monitoring & Analytics
 
@@ -237,3 +243,9 @@ blocks/
 - **Social Metrics**: Twitter sharing integration
 
 This architecture prioritizes simplicity, maintainability, and automated deployment while providing a robust platform for podcast content delivery and audience engagement.
+
+# important-instruction-reminders
+Do what has been asked; nothing more, nothing less.
+NEVER create files unless they're absolutely necessary for achieving your goal.
+ALWAYS prefer editing an existing file to creating a new one.
+NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested by the User.

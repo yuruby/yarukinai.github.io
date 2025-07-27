@@ -40,6 +40,9 @@ pnpm create-episode
 
 # カスタムタイトルで生成
 pnpm create-episode "カスタムタイトル"
+
+# 特定の出演者を指定して生成
+pnpm create-episode --actors tetuo41,sugaishun
 ```
 
 このコマンドは以下を自動実行します：
