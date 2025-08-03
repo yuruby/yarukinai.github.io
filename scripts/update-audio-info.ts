@@ -68,6 +68,37 @@ function extractAudioInfo(item: RSSItem): AudioInfo {
   };
 }
 
+function extractEpisodeNumber(filePath: string): number {
+  const fileName = path.basename(filePath);
+  const match = fileName.match(/(\d+)\.md$/);
+  if (!match) {
+    throw new Error(`Could not extract episode number from file: ${fileName}`);
+  }
+  return parseInt(match[1], 10);
+}
+
+function extractAndFormatDate(fileContent: string): string {
+  const frontmatterMatch = fileContent.match(/^---\n([\s\S]*?)\n---/);
+  if (!frontmatterMatch || !frontmatterMatch[1]) {
+    throw new Error('Could not find frontmatter in episode file');
+  }
+  
+  const frontmatter = frontmatterMatch[1];
+  const dateMatch = frontmatter.match(/^date:\s*(.+)$/m);
+  if (!dateMatch || !dateMatch[1]) {
+    throw new Error('Could not find date in frontmatter');
+  }
+  
+  // Parse date like "2025-08-04 07:00:00 +0900" and convert to "2025-08-04T07:00:00"
+  const dateString = dateMatch[1].trim();
+  const match = dateString.match(/^(\d{4}-\d{2}-\d{2})\s+(\d{2}:\d{2}:\d{2})/);
+  if (!match || !match[1] || !match[2]) {
+    throw new Error(`Invalid date format: ${dateString}`);
+  }
+  
+  return `${match[1]}T${match[2]}`;
+}
+
 async function getLatestEpisodeNumber(): Promise<number> {
   try {
     const postsDir = path.join(process.cwd(), '_posts');
@@ -128,6 +159,10 @@ async function updateEpisodeFrontmatter(filePath: string, audioInfo: AudioInfo):
     const body = frontmatterMatch[2];
     
     // Update frontmatter fields
+    if (!frontmatter) {
+      throw new Error('Invalid frontmatter content');
+    }
+    
     frontmatter = frontmatter.replace(
       /^audio_file_url:.*$/m,
       `audio_file_url: ${audioInfo.url}`
@@ -172,6 +207,10 @@ async function checkGitStatus(): Promise<void> {
   } catch (error) {
     console.warn('⚠️  Could not check git status:', error);
   }
+}
+
+function generateCommitMessage(episodeNumber: number, formattedDate: string): string {
+  return `Add EP ${episodeNumber}\n\n/schedule ${formattedDate}`;
 }
 
 function parseCommandLineArgs(): { episodeNumber?: number; help?: boolean } {
@@ -241,11 +280,22 @@ async function main(): Promise<void> {
     
     await updateEpisodeFrontmatter(episodeFilePath, audioInfo);
     
+    // Read the updated file content to extract date
+    const updatedContent = await fs.readFile(episodeFilePath, 'utf-8');
+    
+    // Extract episode number and formatted date for commit message
+    const episodeNumber = extractEpisodeNumber(episodeFilePath);
+    const formattedDate = extractAndFormatDate(updatedContent);
+    
+    // Generate commit message
+    const commitMessage = generateCommitMessage(episodeNumber, formattedDate);
+    
     console.log('🎉 音声情報の更新が完了しました！');
     console.log('');
-    console.log('次の手順:');
-    console.log('1. 更新内容を確認してください');
-    console.log('2. コミット: git add . && git commit -m "Update audio info"');
+    console.log('📋 推奨コミットメッセージ:');
+    console.log('---');
+    console.log(commitMessage);
+    console.log('---');
     
   } catch (error) {
     console.error('❌ Unexpected error:', error);

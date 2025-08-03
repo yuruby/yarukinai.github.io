@@ -24,6 +24,7 @@ Yarukinai.fm is a Japanese podcast website built with Jekyll and hosted on GitHu
 ├── _posts/              # Podcast episode markdown files
 ├── _layouts/            # HTML templates (default.html, article.html)
 ├── _includes/           # Reusable HTML components (head.html, header.html, footer.html)
+├── _templates/          # Episode generation templates
 ├── css/                 # Modular SCSS architecture
 │   ├── main.scss       # Main stylesheet entry point
 │   ├── _variables.scss # SCSS variables
@@ -31,8 +32,13 @@ Yarukinai.fm is a Japanese podcast website built with Jekyll and hosted on GitHu
 │   └── blocks/         # Component-specific stylesheets
 ├── images/             # Static assets
 │   └── actors/         # Host profile images
+├── scripts/            # TypeScript automation scripts
+│   ├── create-episode.ts    # Episode generation script
+│   └── update-audio-info.ts # Audio metadata updater
 ├── feed.xml            # RSS/podcast feed generation
 ├── index.html          # Homepage with episode listing
+├── package.json        # Node.js dependencies and scripts
+├── tsconfig.json       # TypeScript configuration
 └── docker/             # Development containerization
 ```
 
@@ -48,6 +54,7 @@ Yarukinai.fm is a Japanese podcast website built with Jekyll and hosted on GitHu
 - **Install TypeScript dependencies**: `pnpm install`
 - **Create new episode**: `pnpm create-episode`
 - **Create episode with custom title**: `pnpm create-episode "カスタムタイトル"`
+- **Create episode with specific actors**: `pnpm create-episode --actors tetuo41,sugaishun`
 - **TypeScript type checking**: `pnpm type-check`
 - **Build TypeScript**: `pnpm build`
 - **Update audio info**: `pnpm update-audio`
@@ -92,6 +99,7 @@ title:                  # Episode title with number
 - **Talk Topics**: Organized sections with links and references
 - **Host Information**: Auto-generated from `_config.yml` actors data
 - **Audio Player**: Embedded MediaElement.js player with custom controls
+- **Japanese Description Format**: `{俳優名1}、{俳優名2}の{人数}人で「トピック1」「トピック2」「トピック3」などについて話しました。`
 
 #### Naming Convention
 Posts follow the pattern: `YYYY-MM-DD-{episode_number}.md`
@@ -229,6 +237,14 @@ blocks/
 - **Actor Management**: Supports selecting specific actors with `--actors` flag
 - **Auto-dating**: Automatically sets episode date to next Monday
 - **Episode Numbering**: Auto-detects latest episode number and increments
+- **Master Branch Update**: Automatically switches to master and pulls latest changes before creating new branch
+- **Japanese Description Generation**: Auto-generates descriptions in format `{俳優名}の{人数}人で「」「」「」などについて話しました。`
+
+### Audio Update System
+- **RSS Integration**: Fetches latest episode info from SoundCloud RSS feed
+- **Automatic Updates**: Updates `audio_file_url`, `audio_file_size`, and `duration` fields
+- **Commit Message Generation**: Generates commit messages in format `Add EP {number}\n\n/schedule {YYYY-MM-DDTHH:MM:SS}`
+- **File Detection**: Automatically finds and updates the correct episode file
 
 ## Monitoring & Analytics
 
