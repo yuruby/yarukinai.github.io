@@ -33,6 +33,28 @@ interface ActorConfig {
   };
 }
 
+// Japanese nickname mapping for actors
+const ACTOR_JAPANESE_NAMES: { [key: string]: string } = {
+  tetuo41: 'マーク',
+  sugaishun: '須貝',
+  snowlong: '駿河',
+  operandoOS: 'operandoOS',
+  tsunacan: 'つなかん',
+  adachi: 'あだち',
+  morizyun: 'もりずん',
+  chikuwabu: 'ちくわぶ',
+  yuuki: 'ゆうき',
+  z_ohnami: 'おおなみ',
+  mktakuya: 'まくた',
+  kgmyshin: 'かげ',
+  umekun123: 'うめくん',
+  nagatanuen: 'ながたぬえん',
+  darquro: 'だーくろ',
+  flada: 'ふらだ',
+  toshiemon18: 'としえもん',
+  iwashi: 'いわし'
+};
+
 async function loadActorsConfig(): Promise<ActorConfig> {
   try {
     const configPath = path.join(process.cwd(), '_config.yml');
@@ -119,8 +141,15 @@ function generateDefaultTitle(episodeNumber: number): string {
   return `Episode ${episodeNumber}`;
 }
 
-function generateDefaultDescription(episodeNumber: number): string {
-  return `第${episodeNumber}回のエピソードです。`;
+function generateDefaultDescription(episodeNumber: number, actorIds: string[]): string {
+  // Get Japanese names for the actors
+  const japaneseNames = actorIds.map(id => ACTOR_JAPANESE_NAMES[id] || id);
+  
+  // Join names with Japanese comma
+  const namesText = japaneseNames.join('、');
+  
+  // Create description in the required format
+  return `${namesText}の${actorIds.length}人で「」「」「」などについて話しました。`;
 }
 
 async function loadTemplate(): Promise<string> {
@@ -176,7 +205,16 @@ async function createBranch(branchName: string): Promise<void> {
       process.exit(1);
     }
 
-    // Create and checkout new branch
+    // Switch to master branch
+    console.log('🔄 masterブランチに切り替え中...');
+    await git.checkout('master');
+    
+    // Pull latest changes from origin/master
+    console.log('📥 masterブランチを最新化中...');
+    await git.pull('origin', 'master');
+    console.log('✅ masterブランチを最新化完了');
+
+    // Create and checkout new branch from updated master
     await git.checkoutLocalBranch(branchName);
     console.log(`🌿 新しいブランチを作成: ${branchName}`);
   } catch (error) {
@@ -290,7 +328,7 @@ async function main(): Promise<void> {
       episodeNumber: nextNumber,
       date: nextDate,
       title: options.title || generateDefaultTitle(nextNumber),
-      description: generateDefaultDescription(nextNumber),
+      description: generateDefaultDescription(nextNumber, actorIds),
       filename: `${nextDate}-${nextNumber}.md`,
       branchName: `add/yarukinai-${nextNumber}`,
       actorIds

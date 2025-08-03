@@ -27,6 +27,20 @@ bundle exec jekyll serve --future --incremental
 
 開発サーバーは http://localhost:4000 で起動します。
 
+### 開発コマンド
+
+```bash
+# TypeScript関連
+pnpm install          # 依存関係のインストール
+pnpm type-check       # TypeScript型チェック
+pnpm build           # TypeScriptビルド
+
+# Jekyll関連
+bundle install                              # Ruby依存関係のインストール
+bundle exec jekyll serve --future --incremental  # 開発サーバー起動
+bundle exec jekyll build                   # サイトビルド
+```
+
 ### 新しいエピソードの追加
 
 #### 自動生成（推奨）
@@ -46,10 +60,29 @@ pnpm create-episode --actors tetuo41,sugaishun
 ```
 
 このコマンドは以下を自動実行します：
+- masterブランチを最新化してから新しいブランチを作成
 - 最新エピソード番号の検出と次回番号の計算
 - 次の月曜日の日付を自動設定
 - 新しいGitブランチ `add/yarukinai-{番号}` を作成
+- 日本語形式の description を自動生成（`{俳優名}の{人数}人で「」「」「」などについて話しました。`）
 - テンプレートからエピソードファイルを生成
+
+### 音声情報の更新
+
+録音したエピソードをSoundCloudにアップロード後、音声情報を自動更新できます：
+
+```bash
+# 最新エピソードの音声情報を更新
+pnpm update-audio
+
+# 特定のエピソード番号を指定して更新
+pnpm update-audio 285
+```
+
+このコマンドは以下を実行します：
+- SoundCloudのRSSフィードから最新の音声情報を取得
+- `audio_file_url`、`audio_file_size`、`duration` を自動更新
+- 適切なコミットメッセージを生成・表示（`Add EP {番号}` + `/schedule {日時}` 形式）
 
 #### 手動作成
 
