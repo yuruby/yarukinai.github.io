@@ -11,10 +11,12 @@ Yarukinai.fm is a Japanese podcast website built with Jekyll and hosted on GitHu
 ## Architecture
 
 ### Core Technology Stack
-- **Jekyll**: Static site generator with GitHub Pages integration
-- **Ruby 2.7.7**: Runtime environment (containerized)
-- **SCSS**: CSS preprocessing with modular component structure
-- **Docker**: Development environment containerization
+- **Jekyll**: Static site generator with GitHub Pages integration using `github-pages` gem
+- **Ruby**: Runtime environment (containerized with Docker)
+- **TypeScript**: Automation scripts with tsx for execution
+- **SCSS**: CSS preprocessing with modular BEM-like component structure
+- **Docker**: Development environment containerization with live reload
+- **pnpm**: Package manager for Node.js dependencies
 
 ### Project Structure
 
@@ -46,6 +48,7 @@ Yarukinai.fm is a Japanese podcast website built with Jekyll and hosted on GitHu
 
 ### Essential Commands
 - **Start development server**: `docker-compose up` (recommended) or `bundle exec jekyll serve --future --incremental`
+- **Development server with future posts**: `bundle exec jekyll serve --future --force_polling --incremental`
 - **Build site**: `bundle exec jekyll build`
 - **Install dependencies**: `bundle install`
 - **Serve with future posts**: `bundle exec jekyll serve --future`
@@ -57,7 +60,7 @@ Yarukinai.fm is a Japanese podcast website built with Jekyll and hosted on GitHu
 - **Create episode with specific actors**: `pnpm create-episode --actors tetuo41,sugaishun`
 - **TypeScript type checking**: `pnpm type-check`
 - **Build TypeScript**: `pnpm build`
-- **Update audio info**: `pnpm update-audio`
+- **Update audio info**: `pnpm update-audio` or `pnpm update-audio 285` (specific episode)
 
 ### Development Setup
 
@@ -126,15 +129,26 @@ actors:
 ### Component Organization
 ```
 blocks/
+├── _reset.scss         # Browser normalization (loaded first)
 ├── _actor.scss         # Host profile styling
-├── _article.scss       # Episode page layout
+├── _article.scss       # Episode page layout  
+├── _base.scss          # Base HTML element styles
 ├── _card.scss          # Card component system
-├── _header.scss        # Site header
+├── _container.scss     # Layout container styles
 ├── _footer.scss        # Site footer
+├── _header.scss        # Site header
+├── _list-group.scss    # List component styling
+├── _main.scss          # Main content area
 ├── _markdown.scss      # Content typography
 ├── _pagination.scss    # Pagination navigation styling
-└── _responsive.scss    # Mobile responsiveness
+├── _responsive.scss    # Mobile responsiveness
+└── _utilities.scss     # Utility classes
 ```
+
+### CSS Import Order
+The main.scss follows a specific import order:
+1. **Fixed Order**: `reset` → `_mixins` → `_variables`  
+2. **Alphabetical Order**: All block components
 
 ## Deployment Process
 
@@ -151,10 +165,12 @@ blocks/
 ## Key Features
 
 ### Podcast Integration
-- **MediaElement.js**: Audio player with speed controls, progress tracking
-- **RSS Feed**: iTunes/Spotify compatible podcast feed
-- **Multiple Platforms**: Links to Apple Podcasts, Spotify
-- **Download Links**: Direct MP3 access
+- **MediaElement.js**: Audio player with custom features - `["playpause", "progress", "current", "duration", "volume", "speed"]`
+- **Audio Player Config**: `alwaysShowControls: true`, `alwaysShowHours: true`, `enableAutosize: true`
+- **RSS Feed**: iTunes/Spotify compatible podcast feed with iTunes tags, media:keywords, categories
+- **Multiple Platforms**: Links to Apple Podcasts, Spotify with URLs in `_config.yml`
+- **Download Links**: Direct MP3 access from SoundCloud URLs
+- **Conditional Rendering**: Audio player only shows when `audio_file_url` is present
 
 ### SEO & Social
 - **Open Graph**: Social media preview optimization
@@ -218,10 +234,13 @@ blocks/
 ## Configuration Notes
 
 ### Jekyll Settings
-- **Timezone**: Asia/Tokyo
-- **Markdown**: Kramdown processor
-- **Permalinks**: `/episode/:title` structure
-- **Exclusions**: Development files excluded from builds
+- **Timezone**: Asia/Tokyo for date formatting
+- **Markdown**: Kramdown processor for content rendering
+- **Permalinks**: `/episode/:title` structure for SEO-friendly URLs
+- **SCSS**: Custom sass_dir set to `css/` for modular architecture
+- **Exclusions**: Development files (docker/, Gemfile, vendor/) excluded from builds
+- **Plugins**: `jekyll-paginate` for episode pagination
+- **Actor Data**: Centralized actor configuration in `_config.yml` with image_url, name, url fields
 
 ### Dependencies
 - **Jekyll**: `github-pages` and `jekyll-paginate` gems required for site generation
@@ -230,21 +249,25 @@ blocks/
 - **Pagination**: 20 episodes per page using jekyll-paginate plugin
 
 ### Episode Generation System
-- **TypeScript**: Automated episode creation with `scripts/create-episode.ts`
-- **Template**: Episode template in `_templates/episode-template.md`
-- **Git Integration**: Automatic branch creation following `add/yarukinai-{number}` pattern
+- **TypeScript**: Automated episode creation with `scripts/create-episode.ts` using tsx runtime
+- **Template System**: Episode template in `_templates/episode-template.md` with placeholder substitution
+- **Git Integration**: Automatic branch creation following `add/yarukinai-{number}` pattern using simple-git
 - **Dependencies**: `date-fns`, `fs-extra`, `simple-git` for date calculation and file operations
-- **Actor Management**: Supports selecting specific actors with `--actors` flag
-- **Auto-dating**: Automatically sets episode date to next Monday
-- **Episode Numbering**: Auto-detects latest episode number and increments
+- **Actor Management**: Supports selecting specific actors with `--actors` flag, references `_config.yml` actors data
+- **Japanese Nickname Mapping**: Maps actor IDs to Japanese names (e.g., tetuo41 → マーク, sugaishun → 須貝)
+- **Auto-dating**: Automatically sets episode date to next Monday using date-fns `nextMonday()`
+- **Episode Numbering**: Auto-detects latest episode number by parsing existing `_posts/` filenames
 - **Master Branch Update**: Automatically switches to master and pulls latest changes before creating new branch
 - **Japanese Description Generation**: Auto-generates descriptions in format `{俳優名}の{人数}人で「」「」「」などについて話しました。`
+- **Template Placeholders**: `{{ACTOR_IDS}}`, `{{DATE}}`, `{{DESCRIPTION}}`, `{{EPISODE_NUMBER}}`, `{{TITLE}}`
 
 ### Audio Update System
-- **RSS Integration**: Fetches latest episode info from SoundCloud RSS feed
-- **Automatic Updates**: Updates `audio_file_url`, `audio_file_size`, and `duration` fields
+- **RSS Integration**: Fetches latest episode info from SoundCloud RSS feed using `fast-xml-parser`
+- **Automatic Updates**: Updates `audio_file_url`, `audio_file_size`, and `duration` fields in episode frontmatter
 - **Commit Message Generation**: Generates commit messages in format `Add EP {number}\n\n/schedule {YYYY-MM-DDTHH:MM:SS}`
-- **File Detection**: Automatically finds and updates the correct episode file
+- **File Detection**: Automatically finds and updates the correct episode file by episode number
+- **Episode Selection**: Can target specific episode numbers or default to latest episode
+- **Dependencies**: Uses `fast-xml-parser` for RSS parsing, `fs-extra` for file operations
 
 ## Monitoring & Analytics
 
