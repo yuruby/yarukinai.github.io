@@ -22,7 +22,8 @@ Yarukinai.fm is a Japanese podcast website built with Jekyll and hosted on GitHu
 
 ```
 /
-├── _config.yml           # Jekyll configuration and site metadata
+├── .spec/               # Spec Kit configuration
+├── _config.yml          # Jekyll configuration and site metadata
 ├── _posts/              # Podcast episode markdown files
 ├── _layouts/            # HTML templates (default.html, article.html)
 ├── _includes/           # Reusable HTML components (head.html, header.html, footer.html)
@@ -34,9 +35,16 @@ Yarukinai.fm is a Japanese podcast website built with Jekyll and hosted on GitHu
 │   └── blocks/         # Component-specific stylesheets
 ├── images/             # Static assets
 │   └── actors/         # Host profile images
+├── memory/             # Spec Kit project constitution and guidelines
+│   ├── constitution.md # Project values and technical philosophy
+│   └── constitution_update_checklist.md # Constitution update procedures
 ├── scripts/            # TypeScript automation scripts
 │   ├── create-episode.ts    # Episode generation script
 │   └── update-audio-info.ts # Audio metadata updater
+├── specs/              # Feature specifications (Spec Kit)
+│   ├── episode-generation.md # Episode automation system spec
+│   └── css-architecture.md  # CSS/SCSS architecture spec
+├── templates/          # Spec Kit templates directory
 ├── feed.xml            # RSS/podcast feed generation
 ├── index.html          # Homepage with episode listing
 ├── package.json        # Node.js dependencies and scripts
@@ -282,6 +290,56 @@ The main.scss follows a specific import order:
 - **Social Metrics**: Twitter sharing integration
 
 This architecture prioritizes simplicity, maintainability, and automated deployment while providing a robust platform for podcast content delivery and audience engagement.
+
+## Spec-Driven Development Integration
+
+### GitHub Spec Kit Setup
+The project now incorporates GitHub Spec Kit for specification-driven development:
+
+- **Spec Kit Installation**: Python 3.11+ environment with uv package manager
+- **Project Constitution**: `memory/constitution.md` defines core values and technical philosophy
+- **Specification Directory**: `specs/` contains feature specifications
+- **Specification Process**: Use `/specify`, `/plan`, `/tasks` commands for new feature development
+
+### Specification Workflow
+
+#### For New Features
+1. **Define Requirements**: Use `/specify` command to describe what and why
+2. **Technical Planning**: Use `/plan` command to outline implementation approach
+3. **Task Breakdown**: Use `/tasks` command to create actionable implementation steps
+4. **Implementation**: Follow specification-driven development principles
+
+#### For Existing Features
+- **Episode Generation**: Detailed spec in `specs/episode-generation.md`
+- **CSS Architecture**: Complete spec in `specs/css-architecture.md`
+- **Project Constitution**: Core principles in `memory/constitution.md`
+
+### Development Commands with Spec Kit
+
+#### Specification Management
+- **View Specifications**: Review files in `specs/` directory
+- **Update Constitution**: Follow checklist in `memory/constitution_update_checklist.md`
+- **Spec Kit Tools**: Use `$HOME/.local/bin/specify` for spec-driven workflows
+
+#### Integration with Existing Workflow
+- All existing commands remain unchanged
+- Specifications complement existing CLAUDE.md documentation
+- New features should follow spec-driven approach before implementation
+
+### Specification Documents
+
+#### Current Specifications
+- `specs/episode-generation.md`: Complete automation system specification
+- `specs/css-architecture.md`: Modular SCSS architecture and component system
+- `memory/constitution.md`: Project values, principles, and operational guidelines
+
+#### Specification Development Process
+1. **Requirements Definition**: Clear problem statement and user stories
+2. **Technical Architecture**: Implementation approach and dependencies
+3. **Acceptance Criteria**: Testable requirements and success metrics
+4. **Implementation Planning**: Step-by-step development approach
+
+This spec-driven approach ensures consistent, well-documented development while maintaining the project's existing stability and automation benefits.
 
 # important-instruction-reminders
 Do what has been asked; nothing more, nothing less.
