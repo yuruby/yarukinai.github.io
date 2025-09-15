@@ -1,0 +1,65 @@
+# Spec Kit Configuration for Yarukinai.fm
+
+# AI Agent Configuration
+ai_agent: claude
+
+# Project Configuration
+project:
+  name: "Yarukinai.fm"
+  type: "Jekyll Podcast Website"
+  description: "Japanese tech podcast platform for knowledge sharing"
+
+# Directory Structure
+directories:
+  specs: "specs"
+  memory: "memory"
+  templates: "templates"
+  scripts: "scripts"
+
+# Specification Templates
+templates:
+  feature_spec: "feature-template.md"
+  api_spec: "api-template.md"
+  component_spec: "component-template.md"
+
+# Development Workflow
+workflow:
+  specification_first: true
+  require_acceptance_criteria: true
+  git_integration: true
+  branch_naming: "spec/{feature-name}"
+
+# Integration Settings
+integration:
+  existing_docs: "CLAUDE.md"
+  constitution: "memory/constitution.md"
+  existing_automation:
+    - "Episode generation (TypeScript)"
+    - "Audio metadata updates"
+    - "Git workflow automation"
+
+# Quality Standards
+standards:
+  specification_completeness:
+    - "User stories"
+    - "Acceptance criteria"
+    - "Technical requirements"
+    - "Testing approach"
+
+  implementation_requirements:
+    - "Follow existing code patterns"
+    - "Maintain backward compatibility"
+    - "Update related documentation"
+    - "Test across responsive breakpoints"
+
+# Review Process
+review:
+  specification_review:
+    - "Constitution alignment check"
+    - "Technical feasibility assessment"
+    - "Resource requirement evaluation"
+
+  implementation_review:
+    - "Code quality standards"
+    - "Performance impact"
+    - "Documentation updates"
