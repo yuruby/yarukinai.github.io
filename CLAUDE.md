@@ -22,7 +22,8 @@ Yarukinai.fm is a Japanese podcast website built with Jekyll and hosted on GitHu
 
 ```
 /
-├── _config.yml           # Jekyll configuration and site metadata
+├── .spec/               # Spec Kit configuration
+├── _config.yml          # Jekyll configuration and site metadata
 ├── _posts/              # Podcast episode markdown files
 ├── _layouts/            # HTML templates (default.html, article.html)
 ├── _includes/           # Reusable HTML components (head.html, header.html, footer.html)
@@ -34,9 +35,16 @@ Yarukinai.fm is a Japanese podcast website built with Jekyll and hosted on GitHu
 │   └── blocks/         # Component-specific stylesheets
 ├── images/             # Static assets
 │   └── actors/         # Host profile images
+├── memory/             # Spec Kit project constitution and guidelines
+│   ├── constitution.md # Project values and technical philosophy
+│   └── constitution_update_checklist.md # Constitution update procedures
 ├── scripts/            # TypeScript automation scripts
 │   ├── create-episode.ts    # Episode generation script
 │   └── update-audio-info.ts # Audio metadata updater
+├── specs/              # Feature specifications (Spec Kit)
+│   ├── episode-generation.md # Episode automation system spec
+│   └── css-architecture.md  # CSS/SCSS architecture spec
+├── templates/          # Spec Kit templates directory
 ├── feed.xml            # RSS/podcast feed generation
 ├── index.html          # Homepage with episode listing
 ├── package.json        # Node.js dependencies and scripts
