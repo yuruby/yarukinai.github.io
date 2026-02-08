@@ -32,3 +32,4 @@ dist/
 # OS generated files
 Thumbs.db
 ehthumbs.db
+.claude/settings.local.json
