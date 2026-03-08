@@ -11,6 +11,10 @@ actors:
     image_url: /images/actors/snowlong.png
     name: snowlong
     url: https://twitter.com/_snowlong
+  nurume:
+    image_url: /images/actors/snowlong.png
+    name: nurum
+    url: https://twitter.com/_snowlong
   tetuo41:
     image_url: /images/actors/tetuo41.jpeg
     name: tetuo41
