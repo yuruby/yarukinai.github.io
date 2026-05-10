@@ -33,3 +33,4 @@ dist/
 Thumbs.db
 ehthumbs.db
 .claude/settings.local.json
+.claude/settings.local.json
