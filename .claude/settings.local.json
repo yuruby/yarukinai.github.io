@@ -4,7 +4,14 @@
       "Bash(mkdir:*)",
       "Bash(pnpm create-episode:*)",
       "Bash(git checkout:*)",
-      "Bash(pnpm install:*)"
+      "Bash(pnpm install:*)",
+      "Bash(git mv *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git *)",
+      "WebFetch(domain:feeds.soundcloud.com)",
+      "Bash(gh pr *)"
     ],
     "deny": []
   }
