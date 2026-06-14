@@ -11,7 +11,9 @@
       "Bash(git push *)",
       "Bash(git *)",
       "WebFetch(domain:feeds.soundcloud.com)",
-      "Bash(gh pr *)"
+      "Bash(gh pr *)",
+      "Bash(sort -t'-' -k4 -n)",
+      "Bash(xargs grep -l \"commit-push-pr\\\\|f=\\\\$\\(git diff\")"
     ],
     "deny": []
   }
