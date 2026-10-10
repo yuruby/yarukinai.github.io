@@ -37,7 +37,7 @@
     },
     "typographyMeta": {
       "body": { "displayName": "Body", "purpose": "本文全般。OS 標準の日本語システムフォント、17px / 行間 1.7。" },
-      "marker-site-title": { "displayName": "Site Title", "purpose": "ヘッダーの番組名のみ。黄色のプレートに載る。" },
+      "site-title": { "displayName": "Site Title", "purpose": "ヘッダーの番組名（ロゴ表記）。白文字のシステム書体、500。" },
       "marker-card-heading": { "displayName": "Card Heading", "purpose": "エピソードページのタイトル。" },
       "marker-list-heading": { "displayName": "List Heading", "purpose": "一覧の各エピソードタイトル。" },
       "marker-badge": { "displayName": "Badge", "purpose": "回番号。ピンクの丸の中。" },
@@ -46,6 +46,11 @@
       "code": { "displayName": "Code", "purpose": "インラインコード、コードブロック。" }
     },
     "shadows": [
+      {
+        "name": "header-title-shadow",
+        "value": "0 1px 5px black",
+        "purpose": "写真の上で白い番組名の可読性を保つ唯一のテキストシャドウ。"
+      },
       {
         "name": "kbd-inset",
         "value": "inset 0 -1px 0 #bbb",
@@ -74,12 +79,12 @@
       "css": ".ds-panel { position: relative; background: #fff; border: 2px solid rgba(0,0,0,0.87); border-radius: 6px; padding: 14px 16px 14px 78px; color: rgba(0,0,0,0.87); font-size: 0.9rem; line-height: 1.7; transform: rotate(-0.5deg); transition: transform 0.15s ease-out; } .ds-panel:hover, .ds-panel:focus-within { transform: none; } .ds-badge { position: absolute; left: 14px; top: 14px; width: 50px; height: 50px; border: 2px solid rgba(0,0,0,0.87); border-radius: 50%; background: #ff8fb1; text-align: center; line-height: 46px; font-size: 1rem; } .ds-panel-title { font-size: 1.25rem; font-weight: 400; line-height: 1.5; } .ds-panel-title a { color: #1c3c7c; text-decoration: none; background-image: linear-gradient(transparent 62%, #ffe14d 62%); } .ds-panel-title a:focus-visible { outline: 3px solid #1c3c7c; outline-offset: 3px; } .ds-panel-meta { color: rgba(0,0,0,0.54); font-size: 0.85rem; } @media (prefers-reduced-motion: reduce) { .ds-panel { transition: none; } }"
     },
     {
-      "name": "Site Title Plate",
+      "name": "Site Title",
       "kind": "custom",
-      "refersTo": "site-title-plate",
-      "description": "ヘッダーの番組名。黄色のプレートに載り、-1.5 度傾く。",
-      "html": "<div class=\"ds-header\"><div class=\"ds-plate\">Yarukinai.fm</div><div class=\"ds-desc\">雑談ベースで話すポッドキャスト</div></div>",
-      "css": ".ds-header { background: #4a5568; border-bottom: 3px solid rgba(0,0,0,0.87); padding: 40px 16px; } .ds-plate { display: inline-block; background: #ffe14d; color: rgba(0,0,0,0.87); font-size: 2.5rem; line-height: 1.4; padding: 0 14px; transform: rotate(-1.5deg); } .ds-desc { display: inline-block; margin-top: 12px; padding: 2px 10px; background: rgba(0,0,0,0.6); color: #fff; font-size: 0.9rem; }"
+      "refersTo": "site-title",
+      "description": "ヘッダーの番組名（ロゴ表記）。白文字のシステム書体に柔らかい影。",
+      "html": "<div class=\"ds-header\"><div class=\"ds-title\">Yarukinai.fm</div><div class=\"ds-desc\">雑談ベースで話すポッドキャスト</div></div>",
+      "css": ".ds-header { background: #4a5568; border-bottom: 3px solid rgba(0,0,0,0.87); padding: 40px 16px; } .ds-title { color: #fff; font-size: 2.5rem; font-weight: 500; line-height: 1.7; text-shadow: 0 1px 5px black; } .ds-desc { display: inline-block; margin-top: 12px; padding: 2px 10px; background: rgba(0,0,0,0.6); color: #fff; font-size: 0.9rem; }"
     },
     {
       "name": "Pagination Item",
@@ -103,7 +108,7 @@
     "overview": "毎週のエピソードを、手描きのメモが入った小冊子のように見せる。枠（ヘッダー、番号、タイトル、パネルの縁）は蛍光ペンとマーカー文字で番組らしい気軽さを担い、読み物であるショーノートの本文は落ち着いた白い面と通常のサンセリフのまま保つ。\n\n世界観は「枠」に限り、読む領域には持ち込まない。パネルは 2px の墨の縁と 6px の角丸を持ち、最大 0.5 度だけ傾くが、タップ・フォーカスで真っ直ぐになる。",
     "keyCharacteristics": [
       "白い面とグレーの地という既存のベースに、蛍光ペンの黄・ピンクを小さな印として足す。",
-      "マーカー書体は、サイト名・回番号・エピソードタイトルだけに使う。",
+      "マーカー書体は、回番号とエピソードタイトルだけに使う。サイト名（ロゴ表記）は従来どおり白文字のシステム書体。",
       "一覧は墨の縁取りのパネル。最新回だけがやや大きく、パネル全体が 1 つのタップ領域。",
       "ショーノートの本文は傾きも装飾もない、読みやすいカラム。",
       "影を使わないフラットな面構成。"
@@ -112,7 +117,7 @@
       { "name": "The Highlighter Is a Mark Rule", "body": "黄とピンクは「印」としてだけ使う。広い面（背景、ヘッダー全体）を塗らない。", "section": "colors" },
       { "name": "The One Link Color Rule", "body": "リンクとフォーカスは濃紺のみ。", "section": "colors" },
       { "name": "The Calm Column Rule", "body": "ショーノートの本文には蛍光ペンの色もマーカー書体も傾きも持ち込まない。", "section": "colors" },
-      { "name": "The Marker-Only-Where-It-Speaks Rule", "body": "マーカー書体はサイト名・回番号・タイトルに限る。ナビゲーション、フッター、本文には使わない。", "section": "typography" },
+      { "name": "The Marker-Only-Where-It-Speaks Rule", "body": "マーカー書体は回番号・タイトルに限る。サイト名（ロゴ表記）には使わない。", "section": "typography" },
       { "name": "The Flat-By-Default Rule", "body": "面はフラット。深さが必要でも、影ではなく縁取りで示す。", "section": "elevation" },
       { "name": "The Straighten-On-Touch Rule", "body": "傾きは 0.5 度まで。hover / focus-within で必ず 0 度に戻る。", "section": "elevation" }
     ],
@@ -124,7 +129,7 @@
       "Do フォーカスは濃紺の 3px のリングで必ず見えるようにする。"
     ],
     "donts": [
-      "Don't マーカー書体を本文・ナビゲーション・フッター見出しに広げない。",
+      "Don't マーカー書体を本文・ナビゲーション・サイト名・フッター見出しに広げない。",
       "Don't 黄やピンクで広い面（背景、ヘッダー全体）を塗らない。",
       "Don't パネルにオフセットの影や、2px 以上の傾きを付けない。",
       "Don't ロゴ・ヘッダー写真・濃紺のリンク色を、ユーザーの確認なしに変えない。",

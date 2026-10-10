@@ -25,11 +25,11 @@ typography:
     fontSize: "17px"
     fontWeight: 400
     lineHeight: 1.7
-  marker-site-title:
-    fontFamily: "Yusei Magic, Hiragino Maru Gothic ProN, Yu Gothic, sans-serif"
+  site-title:
+    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica Neue, Hiragino Kaku Gothic ProN, meiryo, sans-serif"
     fontSize: "2.5rem"
-    fontWeight: 400
-    lineHeight: 1.4
+    fontWeight: 500
+    lineHeight: 1.7
   marker-card-heading:
     fontFamily: "Yusei Magic, Hiragino Maru Gothic ProN, Yu Gothic, sans-serif"
     fontSize: "2rem"
@@ -85,11 +85,9 @@ components:
     typography: "{typography.marker-badge}"
     rounded: "{rounded.avatar}"
     size: "50px"
-  site-title-plate:
-    backgroundColor: "{colors.highlight-yellow}"
-    textColor: "{colors.ink}"
-    typography: "{typography.marker-site-title}"
-    padding: "0 14px"
+  site-title:
+    textColor: "{colors.on-header}"
+    typography: "{typography.site-title}"
   pager-item:
     backgroundColor: "{colors.paper-white}"
     textColor: "{colors.ink}"
@@ -114,7 +112,7 @@ components:
 
 **Key Characteristics:**
 - 白い面とグレーの地という既存のベースに、蛍光ペンの黄・ピンクを小さな印として足す。
-- マーカー書体は、サイト名・回番号・エピソードタイトルだけに使う。
+- マーカー書体は、回番号とエピソードタイトルだけに使う。サイト名（ロゴ表記）は従来どおり白文字のシステム書体。
 - 一覧は墨の縁取りのパネル。最新回だけがやや大きい。パネル全体が 1 つのタップ領域。
 - ショーノートの本文は傾きも装飾もない、読みやすいカラム。
 - 影を使わないフラットな面構成。
@@ -127,7 +125,7 @@ components:
 - **Ink Navy** (`#1c3c7c`): すべてのリンクとフォーカスリングの色。本文中のリンクは下線付き。
 
 ### Highlighter
-- **Highlighter Yellow** (`#ffe14d`): タイトルの下線（文字の下 38% を塗る）、サイト名のプレート、ページネーションの現在ページ。
+- **Highlighter Yellow** (`#ffe14d`): タイトルの下線（文字の下 38% を塗る）、ページネーションの現在ページ。
 - **Highlighter Yellow Soft** (`#fff6c2`): ページネーションの hover 背景。
 - **Highlighter Pink** (`#ff8fb1`): 回番号の丸いバッジのみ。
 
@@ -152,10 +150,10 @@ components:
 **Body Font:** OS 標準のシステムサンセリフ（-apple-system, Hiragino Kaku Gothic ProN, meiryo など）
 **Mono Font:** Consolas, Liberation Mono, Menlo, Courier
 
-**Character:** 手書きのマーカー書体は「番組の声」としてサイト名・回番号・タイトルだけに限り、読む文章はシステムフォントのまま。
+**Character:** 手書きのマーカー書体は「番組の声」として回番号・タイトルだけに限り、サイト名と読む文章はシステムフォントのまま。
 
 ### Hierarchy
-- **Site Title** (400, 2.5rem, 1.4): ヘッダーの番組名。黄色のプレートに載り、-1.5 度傾く。
+- **Site Title** (500, 2.5rem, 1.7): ヘッダーの番組名（ロゴ表記）。白文字で、写真の上の可読性のために柔らかい影を付ける。
 - **Card Heading** (400, 2rem, 1.5): エピソードページのタイトル。黄色の下線。
 - **List Heading** (400, 1.25rem、最新回は 1.5rem): 一覧のタイトル。黄色の下線。
 - **Badge** (400, 1rem): 回番号。ピンクの丸の中。
@@ -164,7 +162,7 @@ components:
 - **Label** (400, 0.85–0.9rem): 日付・所要時間・フッター。
 
 ### Named Rules
-**The Marker-Only-Where-It-Speaks Rule.** マーカー書体はサイト名・回番号・タイトルに限る。ナビゲーション、フッター、本文には使わない。
+**The Marker-Only-Where-It-Speaks Rule.** マーカー書体は回番号・タイトルに限る。サイト名（ロゴ表記）には使わない。ナビゲーション、フッター、本文には使わない。
 
 ## Layout
 
@@ -174,7 +172,7 @@ components:
 
 ## Elevation & Depth
 
-奥行きは影ではなく、墨の縁取りと白い面の対比で表す。影はなく、パネルの傾き（最大 0.5 度）は静的で、フォーカスまたは hover で真っ直ぐに戻る（`prefers-reduced-motion` ではトランジションなし）。
+奥行きは影ではなく、墨の縁取りと白い面の対比で表す。影はヘッダーの番組名の柔らかい文字影（写真の上の可読性）だけで、パネルの傾き（最大 0.5 度）は静的で、フォーカスまたは hover で真っ直ぐに戻る（`prefers-reduced-motion` ではトランジションなし）。
 
 ### Named Rules
 **The Flat-By-Default Rule.** 面はフラット。深さが必要でも、影ではなく縁取りで示す。
@@ -187,7 +185,7 @@ components:
 ## Components
 
 ### Site Header
-- **Style:** 番組アートの背景画像に暗幕、下に墨の 3px の線。番組名は黄色のプレート（-1.5 度）。説明文は濃い板の上の白文字。
+- **Style:** 番組アートの背景画像に暗幕、下に墨の 3px の線。番組名は白文字のシステム書体に柔らかい影（ロゴ表記は刷新前のまま）。説明文は濃い板の上の白文字。
 - **Image:** 800px 版（標準解像度のスマホ）と 1600px 版（768px 以上、または高解像度）を切り替える。
 
 ### Episode Panel
