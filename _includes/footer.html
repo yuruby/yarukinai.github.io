@@ -15,11 +15,11 @@
             #{{ site.hashtag }}
           </h2>
           <div class="footer-sections-element-description">
-            {{ site.title }} への感想や質問などは、Twitterでハッシュタグ <a href="https://twitter.com/search?q=%23{{ site.hashtag }}" target="_blank">#{{ site.hashtag }}</a> をご利用ください。
+            {{ site.title }} への感想や質問などは、X（旧Twitter）でハッシュタグ <a href="https://twitter.com/search?q=%23{{ site.hashtag }}" target="_blank">#{{ site.hashtag }}</a> をご利用ください。
           </div>
           <div class="footer-twitter">
             <a class="twitter-share-button" href="https://twitter.com/intent/tweet?hashtags={{ site.hashtag }}&url={{ site.github.url }}">
-              Tweet
+              ポスト
             </a>
           </div>
         </section>
@@ -37,7 +37,7 @@
               </li>
             {% endif %}
             <li>
-              <a href="http://subscribeonandroid.com/{{ site.github.url | remove: "https://" | remove: "http://" }}/feed.xml" target="_blank">Androidで購読</a>
+              <a href="https://www.subscribeonandroid.com/{{ site.github.url | remove: "https://" | remove: "http://" }}/feed.xml" target="_blank">Androidで購読</a>
             </li>
             <li>
               <a href="{{ site.github.url }}/feed.xml" target="_blank">RSSで購読</a>
@@ -66,7 +66,7 @@
       </div>
     </div>
     <div class="footer-copyright">
-      © 2019 <a href="{{ site.github.url }}/">{{ site.title }}</a>
+      © 2019–{{ site.time | date: "%Y" }} <a href="{{ site.github.url }}/">{{ site.title }}</a>
     </div>
   </div>
 </footer>
