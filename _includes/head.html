@@ -14,5 +14,7 @@
   <meta property="og:url" content="{{ site.github.url }}{{ page.url }}" />
   <link rel="alternate" type="application/rss+xml" href="{{ site.github.url }}/feed.xml" />
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/2.23.4/mediaelementplayer.min.css">
+  {% if page.layout == "article" %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/2.23.4/mediaelementplayer.min.css" integrity="sha384-HiBD8Q8WdcueV/Lr0geBOQNIOcmJI5pC75nzCBjx6Mq6hnQb1xdLPF4DdsXFoD8A" crossorigin="anonymous">
+  {% endif %}
 </head>

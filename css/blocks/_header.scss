@@ -1,7 +1,11 @@
 .header {
-  background-image: url(../images/headerbg.jpg);
+  background-image: url(../images/headerbg-800.jpg);
   background-size: cover;
   background-position: center;
+
+  @media (min-width: $width-screen-small-minimum), (min-resolution: 1.5dppx) {
+    background-image: url(../images/headerbg-1600.jpg);
+  }
 
   &-description {
     color: $color-text-light-secondary;
