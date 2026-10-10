@@ -34,3 +34,7 @@ Thumbs.db
 ehthumbs.db
 .claude/settings.local.json
 .claude/settings.local.json
+
+# Impeccable session artifacts (decision-page logs and review screenshots)
+/.impeccable/questions/
+/.impeccable/review/

@@ -3,30 +3,30 @@
     <div class="footer-sections">
       <div class="row">
         <section class="column-small-4 footer-sections-element">
-          <h1 class="footer-sections-element-heading">
+          <h2 class="footer-sections-element-heading">
             {{ site.title }} とは
-          </h1>
+          </h2>
           <div class="footer-sections-element-description">
             {{ site.description_long }}
           </div>
         </section>
         <section class="column-small-4 footer-sections-element">
-          <h1 class="footer-sections-element-heading">
+          <h2 class="footer-sections-element-heading">
             #{{ site.hashtag }}
-          </h1>
+          </h2>
           <div class="footer-sections-element-description">
-            {{ site.title }} への感想や質問などは、Twitterでハッシュタグ <a href="https://twitter.com/search?q=%23{{ site.hashtag }}" target="_blank">#{{ site.hashtag }}</a> をご利用ください。
+            {{ site.title }} への感想や質問などは、X（旧Twitter）でハッシュタグ <a href="https://twitter.com/search?q=%23{{ site.hashtag }}" target="_blank">#{{ site.hashtag }}</a> をご利用ください。
           </div>
           <div class="footer-twitter">
             <a class="twitter-share-button" href="https://twitter.com/intent/tweet?hashtags={{ site.hashtag }}&url={{ site.github.url }}">
-              Tweet
+              ポスト
             </a>
           </div>
         </section>
         <section class="column-small-4 footer-sections-element">
-          <h1 class="footer-sections-element-heading">
+          <h2 class="footer-sections-element-heading">
             購読
-          </h1>
+          </h2>
           <div class="footer-sections-element-description">
             新しいエピソードの配信を購読できます。
           </div>
@@ -37,7 +37,7 @@
               </li>
             {% endif %}
             <li>
-              <a href="http://subscribeonandroid.com/{{ site.github.url | remove: "https://" | remove: "http://" }}/feed.xml" target="_blank">Androidで購読</a>
+              <a href="https://www.subscribeonandroid.com/{{ site.github.url | remove: "https://" | remove: "http://" }}/feed.xml" target="_blank">Androidで購読</a>
             </li>
             <li>
               <a href="{{ site.github.url }}/feed.xml" target="_blank">RSSで購読</a>
@@ -48,17 +48,17 @@
           </ul>
         </section>
         <section class="column-small-4 footer-sections-element">
-          <h1 class="footer-sections-element-heading">
+          <h2 class="footer-sections-element-heading">
             Yarukinai.fmファンクラブ
-          </h1>
+          </h2>
           <div class="footer-sections-element-description">
             <a href="{{ site.fanclub }}">{{ site.title }} ファンクラブ</a>
           </div>
         </section>
         <section class="column-small-4 footer-sections-element">
-          <h1 class="footer-sections-element-heading">
+          <h2 class="footer-sections-element-heading">
             オンラインストア
-          </h1>
+          </h2>
           <div class="footer-sections-element-description">
             <a href="{{ site.online_store }}">{{ site.title }} オンラインストア</a>
           </div>
@@ -66,13 +66,15 @@
       </div>
     </div>
     <div class="footer-copyright">
-      © 2019 <a href="{{ site.github.url }}/">{{ site.title }}</a>
+      © 2019–{{ site.time | date: "%Y" }} <a href="{{ site.github.url }}/">{{ site.title }}</a>
     </div>
   </div>
 </footer>
 <script type="text/javascript" async src="https://platform.twitter.com/widgets.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/2.23.4/mediaelement-and-player.min.js"></script>
+{% if page.layout == "article" %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/2.23.4/mediaelement-and-player.min.js" integrity="sha384-X4KzQkOx/Zb7Eo7TY14MW5I1Rgd9+hReiagexz1Ab3ZgltsQ1q2VJDv2kYs45JaG" crossorigin="anonymous"></script>
+{% endif %}
 {% if site.google_analytics %}
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-BTGD5S4VFT"></script>

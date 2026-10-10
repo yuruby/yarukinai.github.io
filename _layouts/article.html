@@ -23,7 +23,7 @@
                   class="mejs-player"
                   controls=""
                   data-mejsoptions='{"alwaysShowControls": true, "alwaysShowHours": true, "enableAutosize": true, "features": ["playpause", "progress", "current", "duration", "volume", "speed"]}'
-                  preload="auto"
+                  preload="metadata"
                   src="{{ page.audio_file_url }}"
                   width="100%"
                 >
@@ -32,7 +32,7 @@
                   class="mejs-player"
                   controls=""
                   data-mejsoptions='{"alwaysShowControls": true, "alwaysShowHours": true, "enableAutosize": true, "features": ["playpause", "progress", "current", "duration", "volume", "speed"]}'
-                  preload="auto"
+                  preload="metadata"
                   src="{{ page.audio_file_path }}"
                   width="100%"
                 >
@@ -73,7 +73,7 @@
             <ul class="list-group-element">
               <li>
                 <a class="twitter-share-button" href="https://twitter.com/intent/tweet?hashtags={{ site.hashtag }}&url={{ site.github.url }}{{ page.url }}&text={{ page.title }}">
-                  Tweet
+                  ポスト
                 </a>
               </li>
               <li><a href="{{ site.fanclub }}">{{ site.title }} ファンクラブ</a></li>

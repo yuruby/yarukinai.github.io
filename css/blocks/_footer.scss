@@ -1,16 +1,24 @@
 .footer {
-  color: $color-text-dark-secondary;
+  color: $color-text-dark-secondary-on-gray;
   font-size: 0.9rem;
   padding-bottom: 64px;
   padding-top: 64px;
 
   &-copyright {
     text-align: center;
+
+    a {
+      text-decoration: underline;
+    }
   }
 
   &-sections {
     &-element {
       margin-bottom: 24px;
+
+      &-description a {
+        text-decoration: underline;
+      }
 
       &-heading {
         font-size: 1.4rem;

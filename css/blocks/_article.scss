@@ -2,6 +2,17 @@
   &-header {
     margin-bottom: 24px;
 
+    .card-heading {
+      font-family: $font-family-marker;
+      font-weight: 400;
+      line-height: 1.5;
+
+      a {
+        background-image: linear-gradient(transparent 62%, $color-highlight-yellow 62%);
+        padding: 0 4px;
+      }
+    }
+
     &-note {
       color: $color-text-dark-secondary;
       font-size: 0.9em;

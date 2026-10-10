@@ -85,6 +85,8 @@ exclude:
   - LICENSE.txt
   - README.md
   - vendor
+  - PRODUCT.md
+  - DESIGN.md
 google_analytics: G-BTGD5S4VFT
 hashtag: yarukinaifm
 itunes_podcast_url: https://podcasts.apple.com/jp/podcast/yarukinai-fm/id1468116415

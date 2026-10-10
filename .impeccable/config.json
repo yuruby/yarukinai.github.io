@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "flat-type-hierarchy",
+        "value": "*",
+        "files": [
+          "_layouts/article.html"
+        ],
+        "createdAt": "2026-10-10T12:11:37.634Z",
+        "reason": "Claude: false positive. detector could not resolve css/main.css, so SCSS sizes (.card-heading 2rem vs body 17px, ~1.9:1) were not seen; not confirmed by user"
+      }
+    ]
+  }
+}
