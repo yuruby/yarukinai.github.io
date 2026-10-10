@@ -1,48 +1,50 @@
 ---
 name: Yarukinai.fm
-description: ショーノートを主役にした、グレー地に白いカードを重ねる読み物型のポッドキャストサイト。
+description: 毎週のエピソードを手描きのマーカーと蛍光ペンで縁取る、ショーノート中心のポッドキャストサイト。
 colors:
   ink: "rgba(0, 0, 0, 0.87)"
   ink-muted: "rgba(0, 0, 0, 0.54)"
   ink-muted-on-gray: "rgba(0, 0, 0, 0.6)"
-  ink-hint: "rgba(0, 0, 0, 0.38)"
   on-header: "#fff"
-  on-header-muted: "rgba(255, 255, 255, 0.7)"
   link-navy: "#1c3c7c"
   page-gray: "#eee"
   paper-white: "#fff"
   header-scrim: "rgba(0, 0, 0, 0.3)"
+  description-plate: "rgba(0, 0, 0, 0.6)"
+  highlight-yellow: "#ffe14d"
+  highlight-yellow-soft: "#fff6c2"
+  highlight-pink: "#ff8fb1"
   code-wash: "rgba(0, 0, 0, 0.04)"
   pre-wash: "#f7f7f7"
   rule-gray: "#ddd"
   quote-gray: "#777"
   table-stripe: "#f8f8f8"
-  pager-border: "#dee2e6"
-  pager-text: "#495057"
-  pager-hover-bg: "#f8f9fa"
-  pager-current: "#007bff"
-  pager-current-hover: "#0056b3"
 typography:
   body:
     fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica Neue, Hiragino Kaku Gothic ProN, meiryo, sans-serif"
     fontSize: "17px"
     fontWeight: 400
     lineHeight: 1.7
-  site-title:
-    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica Neue, Hiragino Kaku Gothic ProN, meiryo, sans-serif"
+  marker-site-title:
+    fontFamily: "Yusei Magic, Hiragino Maru Gothic ProN, Yu Gothic, sans-serif"
     fontSize: "2.5rem"
-    fontWeight: 500
-    lineHeight: 1.7
-  card-heading:
-    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica Neue, Hiragino Kaku Gothic ProN, meiryo, sans-serif"
+    fontWeight: 400
+    lineHeight: 1.4
+  marker-card-heading:
+    fontFamily: "Yusei Magic, Hiragino Maru Gothic ProN, Yu Gothic, sans-serif"
     fontSize: "2rem"
     fontWeight: 400
-    lineHeight: 1.25
-  list-heading:
-    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica Neue, Hiragino Kaku Gothic ProN, meiryo, sans-serif"
-    fontSize: "1.5rem"
+    lineHeight: 1.5
+  marker-list-heading:
+    fontFamily: "Yusei Magic, Hiragino Maru Gothic ProN, Yu Gothic, sans-serif"
+    fontSize: "1.25rem"
     fontWeight: 400
-    lineHeight: 1.7
+    lineHeight: 1.5
+  marker-badge:
+    fontFamily: "Yusei Magic, Hiragino Maru Gothic ProN, Yu Gothic, sans-serif"
+    fontSize: "1rem"
+    fontWeight: 400
+    lineHeight: 1.5
   section-heading:
     fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica Neue, Hiragino Kaku Gothic ProN, meiryo, sans-serif"
     fontSize: "1.3rem"
@@ -59,6 +61,7 @@ typography:
     fontWeight: 400
     lineHeight: 1.45
 rounded:
+  panel: "6px"
   card: "2px"
   code: "3px"
   avatar: "50%"
@@ -70,154 +73,155 @@ spacing:
   xl: "32px"
   section: "48px"
   footer: "64px"
-  header: "96px"
 components:
-  card:
+  episode-panel:
     backgroundColor: "{colors.paper-white}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.card}"
-    padding: "32px 0"
-  list-item:
+    rounded: "{rounded.panel}"
+    padding: "14px 16px 14px 78px"
+  episode-badge:
+    backgroundColor: "{colors.highlight-pink}"
     textColor: "{colors.ink}"
-    typography: "{typography.label}"
-    padding: "16px 0"
+    typography: "{typography.marker-badge}"
+    rounded: "{rounded.avatar}"
+    size: "50px"
+  site-title-plate:
+    backgroundColor: "{colors.highlight-yellow}"
+    textColor: "{colors.ink}"
+    typography: "{typography.marker-site-title}"
+    padding: "0 14px"
   pager-item:
     backgroundColor: "{colors.paper-white}"
-    textColor: "{colors.pager-text}"
-    padding: "7px 16px"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.panel}"
+    padding: "7px 14px"
   pager-item-hover:
-    backgroundColor: "{colors.pager-hover-bg}"
+    backgroundColor: "{colors.highlight-yellow-soft}"
   pager-item-current:
-    backgroundColor: "{colors.pager-current}"
-    textColor: "{colors.on-header}"
-  site-header:
-    textColor: "{colors.on-header}"
-    typography: "{typography.site-title}"
-    padding: "96px 0"
+    backgroundColor: "{colors.highlight-yellow}"
+    textColor: "{colors.ink}"
 ---
 
 # Design System: Yarukinai.fm
 
 ## Overview
 
-**Creative North Star: "The Show Notes Library"**
+**Creative North Star: "The Annotated Zine"**
 
-グレーの地（`page-gray`）に、白いカード（`paper-white`）を 1 枚だけ置く。サイトの主役はデザインではなく、エピソードごとに積み上がるショーノート（話題と参照リンクの束）であり、UI は書架のように静かに内容を支える。ヘッダーの背景画像だけが唯一の視覚的な「表紙」で、その下は読み物として一貫した白い面が続く。
+毎週のエピソードを、手描きのメモが入った小冊子のように見せる。枠（ヘッダー、番号、タイトル、パネルの縁）は蛍光ペンとマーカー文字で番組らしい気軽さを担い、読み物であるショーノートの本文は落ち着いた白い面と通常のサンセリフのまま保つ。ロゴ・配色・ヘッダー写真は維持し、ベースのグレー・白・濃紺に、蛍光ペンの黄とピンクを小さな「印」として足している。
 
-全体は軽く、カジュアルな手触りを持つ。影や強い装飾はなく、角丸も 2px に留まる。強調は色や大きな面ではなく、文字サイズと余白、そして濃紺のリンクで行う。ショーノートは長いリスト構造になるため、行間（1.7）と下線付きリンクで走査性を保つ。
+世界観は「枠」に限り、読む領域には持ち込まない。パネルは 2px の墨の縁と 6px の角丸を持ち、最大 0.5 度だけ傾くが、タップ・フォーカスで真っ直ぐになる。影や強い装飾は使わず、傾きは静的で動きではない。
 
 **Key Characteristics:**
-- 背景はグレー、コンテンツは白いカードに集約する。
-- アクセントは濃紺のリンク 1 色のみ。
-- 影を使わないフラットな面構成。ヘッダー文字の影だけが例外。
-- 日本語本文を想定したシステムフォントと 17px / 行間 1.7 の読みやすい本文。
-- 幅 960px 以下の 1 カラム構成で、スマートフォンでもそのまま読める。
+- 白い面とグレーの地という既存のベースに、蛍光ペンの黄・ピンクを小さな印として足す。
+- マーカー書体は、サイト名・回番号・エピソードタイトルだけに使う。
+- 一覧は墨の縁取りのパネル。最新回だけがやや大きい。パネル全体が 1 つのタップ領域。
+- ショーノートの本文は傾きも装飾もない、読みやすいカラム。
+- 影を使わないフラットな面構成。
 
 ## Colors
 
-無彩色のグレーと白を土台に、濃紺のリンクだけが色味を持つ、抑制されたパレット。
+無彩色のグレーと白、墨色の文字、濃紺のリンクに、蛍光ペンの黄とピンクが小さな印として載る。
 
 ### Primary
-- **Ink Navy** (`#1c3c7c`): すべてのリンクの色。通常・hover・focus・active で同一。本文中のリンクは下線付き（`.markdown a`）、見出しやナビ内のリンクは下線なし。
+- **Ink Navy** (`#1c3c7c`): すべてのリンクとフォーカスリングの色。本文中のリンクは下線付き。
+
+### Highlighter
+- **Highlighter Yellow** (`#ffe14d`): タイトルの下線（文字の下 38% を塗る）、サイト名のプレート、ページネーションの現在ページ。
+- **Highlighter Yellow Soft** (`#fff6c2`): ページネーションの hover 背景。
+- **Highlighter Pink** (`#ff8fb1`): 回番号の丸いバッジのみ。
 
 ### Neutral
-- **Page Gray** (`#eee`): ページ全体の背景。カードの外側の「額縁」。
-- **Paper White** (`#fff`): カード・メイン領域の面。
-- **Ink** (`rgba(0,0,0,0.87)`): 本文テキスト。
-- **Ink Muted** (`rgba(0,0,0,0.54)`): 白いカード上の日付などの補足。
-- **Ink Muted on Gray** (`rgba(0,0,0,0.6)`): グレー地（`#eee`）に直接置くフッターの文字。0.54 では 4.4:1 で AA に届かないため、0.6（約 5.5:1）にしている。
-- **Ink Hint** (`rgba(0,0,0,0.38)`): 定義済み。最も弱いヒント用。
-- **Header Scrim** (`rgba(0,0,0,0.3)`): ヘッダー画像の上に重ねる暗幕。白文字の可読性を確保する。
-- **Rule Gray** (`#ddd`): 引用の縦線、表の罫線。
-- **Quote Gray** (`#777`): 引用文、h6 の文字色。
-- **Code Wash** (`rgba(0,0,0,0.04)`) / **Pre Wash** (`#f7f7f7`): インラインコード、コードブロックの背景。
-
-### Pagination Blue
-- **Pager Current** (`#007bff`, hover `#0056b3`): ページネーションの現在ページのみ。リンクの濃紺（`#1c3c7c`）とは別の青であり、現状は不揃い。
+- **Page Gray** (`#eee`): ページ背景（フッター周り）。
+- **Paper White** (`#fff`): カード・メイン領域・パネルの面。
+- **Ink** (`rgba(0,0,0,0.87)`): 本文、パネルの縁、アバターの縁、ページネーションの縁。
+- **Ink Muted** (`rgba(0,0,0,0.54)`): 白い面の上の日付・所要時間などの補足。
+- **Ink Muted on Gray** (`rgba(0,0,0,0.6)`): グレー地に直接置くフッターの文字（AA を満たす）。
+- **Header Scrim** (`rgba(0,0,0,0.3)`): ヘッダー写真に重ねる暗幕。
+- **Description Plate** (`rgba(0,0,0,0.6)`): ヘッダーの説明文の背面の濃い板。写真の上でも白文字が読める。
+- **Code Wash** / **Pre Wash** / **Rule Gray** / **Quote Gray** / **Table Stripe**: コード・罫線・引用・表のための従来どおりの中性色。
 
 ### Named Rules
-**The One Link Color Rule.** 色味を持つのはリンクの濃紺だけ。装飾目的でカラーを足さない。
-**The Gray Frame Rule.** グレー（`#eee`）は常に外側、白（`#fff`）は常に内容。この内外の関係を逆転させない。
+**The Highlighter Is a Mark Rule.** 黄とピンクは「印」としてだけ使う。広い面（背景、ヘッダー全体）を塗らない。
+**The One Link Color Rule.** リンクとフォーカスは濃紺のみ。
+**The Calm Column Rule.** ショーノートの本文には蛍光ペンの色もマーカー書体も傾きも持ち込まない。
 
 ## Typography
 
-**Display / Body Font:** OS 標準のシステムフォント（`-apple-system`, `BlinkMacSystemFont`, `Segoe UI`, `Helvetica Neue`, `Hiragino Kaku Gothic ProN`, `meiryo`, sans-serif）
+**Marker Font:** Yusei Magic（Google Fonts、`display=swap`。フォールバックは Hiragino Maru Gothic ProN, Yu Gothic）
+**Body Font:** OS 標準のシステムサンセリフ（-apple-system, Hiragino Kaku Gothic ProN, meiryo など）
 **Mono Font:** Consolas, Liberation Mono, Menlo, Courier
 
-**Character:** Web フォントを読み込まない、軽量で素直な日本語サンセリフ。リセット CSS の `font: inherit` により見出しも通常ウェイト（400）で、見出しと本文の差は主にサイズで付く。太字は `strong` と一部の要素に限られる。
+**Character:** 手書きのマーカー書体は「番組の声」としてサイト名・回番号・タイトルだけに限り、読む文章はシステムフォントのまま。
 
 ### Hierarchy
-- **Site Title** (500, 2.5rem, 行間 1.7): ヘッダーの番組名。白文字に `text-shadow` を付ける。
-- **Card Heading** (400, 2rem, 行間 1.25): エピソード詳細ページのタイトル。中央揃え。
-- **List Heading** (400, 1.5rem): 一覧ページの各エピソードタイトル。
-- **Section Heading** (400, 1.3rem, 上余白 50px): 本文中の `h2`（話したこと・出演者など）。
+- **Site Title** (400, 2.5rem, 1.4): ヘッダーの番組名。黄色のプレートに載り、-1.5 度傾く。
+- **Card Heading** (400, 2rem, 1.5): エピソードページのタイトル。黄色の下線。
+- **List Heading** (400, 1.25rem、最新回は 1.5rem): 一覧のタイトル。黄色の下線。
+- **Badge** (400, 1rem): 回番号。ピンクの丸の中。
+- **Section Heading** (400, 1.3rem, 1.25): ショーノート内の h2。黄色の下線。
 - **Body** (400, 17px / 1.7): 本文全般。
-- **Label** (400, 0.9rem): 一覧の補足、フッター、日付。
-- **Code** (400, 85%, 行間 1.45): コードとコードブロック。
+- **Label** (400, 0.85–0.9rem): 日付・所要時間・フッター。
 
 ### Named Rules
-**The Size-Over-Family Rule.** 階層はフォントを切り替えず、主にサイズで作る。太字は `strong` など意味のある箇所に限る。
+**The Marker-Only-Where-It-Speaks Rule.** マーカー書体はサイト名・回番号・タイトルに限る。ナビゲーション、フッター、本文には使わない。
 
 ## Layout
 
-`.container` は最大幅 960px、左右 16px の余白で中央に置く。その中に 1 枚のカードを縦に並べる 1 カラム構成。`main` は上下 48px、フッターは上下 64px、ヘッダーの暗幕は上下 96px（767px 以下では 40px）の余白を持つ。
+`.container` は最大幅 960px、左右 16px の余白で中央に置く。一覧はパネルを縦に並べる 1 カラムで、エピソードページは 1 枚のカードに音声プレーヤー、内容紹介、出演者、ショーノートの順で積む。`main` は上下 48px、フッターは上下 64px。ヘッダーの暗幕は上下 96px（767px 以下は 40px）。
 
-余白は 4 / 8 / 16 / 24 / 32 / 48 / 64 / 96px の 8 の倍数に近いスケール。カードの下余白は 24px。レスポンシブの切り替え点は 767px（`respond-to(mobile)`）。12 カラムのフロートグリッド（ガター 24px）も定義されているが、現在使われているのはフッター（`_includes/footer.html`）のみで、一覧・詳細ページは 1 カラム。
+スマホではパネルは画面幅いっぱい（左右 16px）で、左の 78px に回番号バッジ、その右にタイトル・日付・説明・アバターを置く。レスポンシブの切り替え点は 767px。ページネーションは現在ページの前後 2 つに絞り、間を「…」で省略する。
 
 ## Elevation & Depth
 
-奥行きは影ではなく、グレー地と白いカードの明度差だけで表す。カードに `box-shadow` はない。例外は 2 つ: ヘッダーの番組名の `text-shadow: 0 1px 5px black`（画像上の可読性）と、`kbd` の内側ライン。
+奥行きは影ではなく、墨の縁取りと白い面の対比で表す。影はなく、パネルの傾き（最大 0.5 度）は静的で、フォーカスまたは hover で真っ直ぐに戻る（`prefers-reduced-motion` ではトランジションなし）。
 
 ### Named Rules
-**The Flat-By-Default Rule.** 面はフラット。深さが必要なら影を足す前に、地と面の明度差を使う。
+**The Flat-By-Default Rule.** 面はフラット。深さが必要でも、影ではなく縁取りで示す。
+**The Straighten-On-Touch Rule.** 傾きは 0.5 度まで。hover / focus-within で必ず 0 度に戻る。
 
 ## Shapes
 
-形は直線的でほぼ角を持つ。カードは 2px、コードは 3px のごく小さな角丸。唯一の大きな丸はホストのアバター画像（`50%`）で、人であることを示す記号として使う。区切りは 1px の細い罫線（`#ddd`, `#dee2e6`）で行う。
+形は直線的で、パネルとページネーションは 6px の小さな角丸に墨の 2px の縁。カードは 2px、コードは 3px。アバターと回番号バッジだけが完全な円で、アバターには墨の 2px の縁が付く。
 
 ## Components
 
 ### Site Header
-- **Style:** 番組アートの背景画像（`cover`, 中央）に暗幕、白文字の番組名と説明。画像は 800px 版（標準解像度のスマホ）と 1600px 版（768px 以上、または高解像度）を切り替える。元画像 `headerbg.jpg` は保存用で参照しない。
-- **Typography:** Site Title（2.5rem / 500）。説明文は 0.9rem・白 70%。
-- **Behavior:** 番組名はトップへのリンク。リンク色は文字色を継承する。
+- **Style:** 番組アートの背景画像に暗幕、下に墨の 3px の線。番組名は黄色のプレート（-1.5 度）。説明文は濃い板の上の白文字。
+- **Image:** 800px 版（標準解像度のスマホ）と 1600px 版（768px 以上、または高解像度）を切り替える。
 
-### Cards / Containers
-- **Corner Style:** 2px
-- **Background:** Paper White
-- **Shadow Strategy:** なし
-- **Padding:** 上下 32px。ヘッダーは中央揃え、本文は左揃え。
-
-### Episode List Item
-- **Style:** 一覧の 1 エピソード。タイトル（1.5rem）、日付、説明、出演者アバター（40px・丸）の順。
-- **Rhythm:** 上下 16px。リンクはタイトルのみ。
+### Episode Panel
+- **Style:** 白、墨の 2px の縁、6px の角丸。奇数番目は -0.5 度、偶数番目は +0.5 度。
+- **Contents:** ピンクの丸い回番号バッジ、マーカー書体のタイトル（黄色の下線）、日付と所要時間、説明、出演者のアバター。
+- **Latest:** 一覧の 1 ページ目の先頭だけが一回り大きい。
+- **Interaction:** パネル全体が 1 つのリンク。hover / focus-within で傾きが戻り、focus-within には濃紺のフォーカスリング。
 
 ### Actor Avatar
-- **Style:** 丸い画像。詳細ページでは 72px、一覧では 40px。名前を画像の下に中央揃えで添える。
-- **Link:** 下線なし。複数名は 1rem 間隔で横並び。
+- **Style:** 墨の 2px の縁の丸い画像。詳細ページでは 72px、一覧では 40px。
 
 ### Pagination
-- **Item:** 白背景、`#dee2e6` の細い枠、角丸なし、`7px 16px`。
-- **Hover:** 背景 `#f8f9fa`、枠 `#adb5bd`。0.2s のトランジション。
-- **Current:** 背景・枠とも `#007bff`、白文字、太字。
-- **Container:** 中央寄せ・折り返し。上に 1px の罫線。
+- **Item:** 白、墨の 2px の縁、6px の角丸、最小幅 44px。
+- **Hover:** 淡い黄色（`#fff6c2`）。
+- **Current:** 黄色（`#ffe14d`）と太字。
+- **Ellipsis:** 枠も背景もない「…」。
 
 ### Show Notes (`.markdown`)
-- **Style:** 見出し、箇条書き、リンクで構成される本文。箇条書きは入れ子の深さでマーカーが変わる。
-- **Links:** 文章の中にあるリンク（本文、フッターの説明文・コピーライト）は下線付きの濃紺。見出しやリスト項目など単独のリンクは下線なし。
-- **Audio:** MediaElement.js のプレーヤーを本文先頭に幅いっぱいで置く。
+- **Style:** 見出し、箇条書き、リンクによる読み物。`h2` だけに黄色の下線。
+- **Links:** 文章中のリンク（本文、フッターの説明文・コピーライト）は下線付きの濃紺。
+- **Audio:** MediaElement.js のプレーヤーを本文の先頭に幅いっぱいで置く。
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** 色味はリンクの濃紺（`#1c3c7c`）だけに留め、新しいアクセントを足さない。
-- **Do** グレー地（`#eee`）の上に白いカードを置く構成を保つ。
-- **Do** 階層は主にサイズで作り、日本語システムフォントのままにする。
-- **Do** ショーノートの箇条書きとリンクの走査性（行間 1.7、下線）を最優先する。
-- **Do** スマートフォン幅（〜767px）で崩れないよう、1 カラムを基本にする。
+- **Do** 黄とピンクは回番号、タイトルの下線、現在ページなどの小さな印に限る。
+- **Do** 傾きは最大 0.5 度、hover / focus で必ず真っ直ぐに戻す。
+- **Do** ショーノートの本文は通常のサンセリフ・無装飾で、行間 1.7 を保つ。
+- **Do** パネル全体を 1 つのタップ領域にし、44px 以上の操作領域を確保する。
+- **Do** フォーカスは濃紺の 3px のリングで必ず見えるようにする。
 
 ### Don't:
-- **Don't** カードに影や大きな角丸を付けない。フラットで軽い印象を保つ。
-- **Don't** ロゴ・ヘッダー画像・濃紺のリンク色を、ユーザーの確認なしに変えない（ブランドとして保持する方針）。
-- **Don't** Web フォントや装飾を足して、読み込みと情報密度を損なわない。
-- **Don't** ページネーションの青（`#007bff`）を他の箇所に広げない。統一する場合はリンク色との整理を先に決める。
+- **Don't** マーカー書体を本文・ナビゲーション・フッター見出しに広げない。
+- **Don't** 黄やピンクで広い面（背景、ヘッダー全体）を塗らない。
+- **Don't** パネルにオフセットの影や、2px 以上の傾きを付けない。
+- **Don't** ロゴ・ヘッダー写真・濃紺のリンク色を、ユーザーの確認なしに変えない。
+- **Don't** パネルをさらに別の白いカードの中に入れ子にしない。

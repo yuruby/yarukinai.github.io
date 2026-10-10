@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-10T20:20:00+09:00",
+  "generatedAt": "2026-10-10T22:30:00+09:00",
   "title": "Design System: Yarukinai.fm",
   "extensions": {
     "colorMeta": {
@@ -9,6 +9,18 @@
         "displayName": "Ink Navy",
         "canonical": "#1c3c7c",
         "tonalRamp": ["#0a1530", "#10244b", "#1c3c7c", "#2b57ad", "#4c78cc", "#7d9bdd", "#b3c4ec", "#e1e8f8"]
+      },
+      "highlight-yellow": {
+        "role": "secondary",
+        "displayName": "Highlighter Yellow",
+        "canonical": "#ffe14d",
+        "tonalRamp": ["#4d3f00", "#806900", "#b39500", "#e6c200", "#ffe14d", "#ffeb85", "#fff3b3", "#fff9d9"]
+      },
+      "highlight-pink": {
+        "role": "tertiary",
+        "displayName": "Highlighter Pink",
+        "canonical": "#ff8fb1",
+        "tonalRamp": ["#4d0a22", "#801538", "#b3204f", "#e63b70", "#ff8fb1", "#ffb3c9", "#ffd1de", "#ffe9ef"]
       },
       "page-gray": {
         "role": "neutral",
@@ -21,40 +33,30 @@
         "displayName": "Paper White",
         "canonical": "#fff",
         "tonalRamp": ["#1a1a1a", "#3a3a3a", "#595959", "#777777", "#9a9a9a", "#bdbdbd", "#dddddd", "#ffffff"]
-      },
-      "pager-current": {
-        "role": "secondary",
-        "displayName": "Pagination Blue",
-        "canonical": "#007bff",
-        "tonalRamp": ["#001a38", "#003470", "#0056b3", "#007bff", "#3d9bff", "#7ab8ff", "#b8d8ff", "#e3f0ff"]
       }
     },
     "typographyMeta": {
       "body": { "displayName": "Body", "purpose": "本文全般。OS 標準の日本語システムフォント、17px / 行間 1.7。" },
-      "site-title": { "displayName": "Site Title", "purpose": "ヘッダーの番組名のみ。" },
-      "card-heading": { "displayName": "Card Heading", "purpose": "エピソード詳細ページのタイトル。" },
-      "list-heading": { "displayName": "List Heading", "purpose": "一覧ページの各エピソードタイトル。" },
-      "section-heading": { "displayName": "Section Heading", "purpose": "ショーノート本文中の h2。" },
-      "label": { "displayName": "Label", "purpose": "日付、補足、フッター。" },
+      "marker-site-title": { "displayName": "Site Title", "purpose": "ヘッダーの番組名のみ。黄色のプレートに載る。" },
+      "marker-card-heading": { "displayName": "Card Heading", "purpose": "エピソードページのタイトル。" },
+      "marker-list-heading": { "displayName": "List Heading", "purpose": "一覧の各エピソードタイトル。" },
+      "marker-badge": { "displayName": "Badge", "purpose": "回番号。ピンクの丸の中。" },
+      "section-heading": { "displayName": "Section Heading", "purpose": "ショーノート本文中の h2。黄色の下線。" },
+      "label": { "displayName": "Label", "purpose": "日付、所要時間、フッター。" },
       "code": { "displayName": "Code", "purpose": "インラインコード、コードブロック。" }
     },
     "shadows": [
       {
-        "name": "header-title-shadow",
-        "value": "0 1px 5px black",
-        "purpose": "背景画像の上で白い番組名の可読性を保つ唯一のテキストシャドウ。"
-      },
-      {
         "name": "kbd-inset",
         "value": "inset 0 -1px 0 #bbb",
-        "purpose": "kbd 要素のキーキャップ表現。"
+        "purpose": "kbd 要素のキーキャップ表現（影は他では使わない）。"
       }
     ],
     "motion": [
       {
-        "name": "pager-transition",
-        "value": "all 0.2s ease",
-        "purpose": "ページネーション項目の hover 状態の変化。"
+        "name": "panel-straighten",
+        "value": "transform 0.15s ease-out",
+        "purpose": "エピソードパネルの傾きが hover / focus で真っ直ぐに戻る。prefers-reduced-motion ではなし。"
       }
     ],
     "breakpoints": [
@@ -64,74 +66,69 @@
   },
   "components": [
     {
-      "name": "Card",
+      "name": "Episode Panel",
       "kind": "card",
-      "refersTo": "card",
-      "description": "白い面にコンテンツを載せる基本コンテナ。角丸 2px、影なし。",
-      "html": "<div class=\"ds-card\"><div class=\"ds-card-header\">336. 圏論を読み、車を磨き、ルービックキューブを回す</div><div class=\"ds-card-note\">2026年10月05日</div></div>",
-      "css": ".ds-card { background: #fff; border-radius: 2px; padding: 32px 16px; color: rgba(0,0,0,0.87); font-size: 17px; line-height: 1.7; } .ds-card-header { text-align: center; font-size: 2rem; line-height: 1.25; } .ds-card-note { text-align: center; color: rgba(0,0,0,0.54); font-size: 0.9em; margin-top: 8px; }"
+      "refersTo": "episode-panel",
+      "description": "一覧の 1 エピソード。墨の縁、ピンクの回番号バッジ、マーカー書体のタイトル。",
+      "html": "<article class=\"ds-panel\"><span class=\"ds-badge\">336</span><h2 class=\"ds-panel-title\"><a href=\"#\">圏論を読み、車を磨き、ルービックキューブを回す</a></h2><div class=\"ds-panel-meta\">2026年10月05日 ・ 35分</div><p>マーク、須貝の2人で「圏論」「洗車沼」「オデュッセイア」「ドン・キホーテ」などについて話しました。</p></article>",
+      "css": ".ds-panel { position: relative; background: #fff; border: 2px solid rgba(0,0,0,0.87); border-radius: 6px; padding: 14px 16px 14px 78px; color: rgba(0,0,0,0.87); font-size: 0.9rem; line-height: 1.7; transform: rotate(-0.5deg); transition: transform 0.15s ease-out; } .ds-panel:hover, .ds-panel:focus-within { transform: none; } .ds-badge { position: absolute; left: 14px; top: 14px; width: 50px; height: 50px; border: 2px solid rgba(0,0,0,0.87); border-radius: 50%; background: #ff8fb1; text-align: center; line-height: 46px; font-size: 1rem; } .ds-panel-title { font-size: 1.25rem; font-weight: 400; line-height: 1.5; } .ds-panel-title a { color: #1c3c7c; text-decoration: none; background-image: linear-gradient(transparent 62%, #ffe14d 62%); } .ds-panel-title a:focus-visible { outline: 3px solid #1c3c7c; outline-offset: 3px; } .ds-panel-meta { color: rgba(0,0,0,0.54); font-size: 0.85rem; } @media (prefers-reduced-motion: reduce) { .ds-panel { transition: none; } }"
     },
     {
-      "name": "Episode List Item",
+      "name": "Site Title Plate",
       "kind": "custom",
-      "refersTo": "list-item",
-      "description": "一覧ページの 1 エピソード。タイトル、日付、説明、出演者アバター。",
-      "html": "<article class=\"ds-episode\"><h1 class=\"ds-episode-title\"><a href=\"#\">336. 圏論を読み、車を磨き、ルービックキューブを回す</a></h1><footer class=\"ds-episode-date\">2026年10月05日</footer><p>マーク、須貝の2人で「圏論」「洗車沼」などについて話しました。</p><div class=\"ds-episode-avatars\"><span class=\"ds-avatar\"></span><span class=\"ds-avatar\"></span></div></article>",
-      "css": ".ds-episode { background: #fff; padding: 16px; color: rgba(0,0,0,0.87); font-size: 0.9rem; line-height: 1.7; } .ds-episode-title { font-size: 1.5rem; font-weight: 400; } .ds-episode a { color: #1c3c7c; text-decoration: none; } .ds-episode a:focus-visible { outline: 2px solid #1c3c7c; outline-offset: 2px; } .ds-episode-date { color: rgba(0,0,0,0.54); } .ds-episode-avatars { margin-top: 8px; } .ds-avatar { display: inline-block; width: 40px; height: 40px; border-radius: 50%; background: #bdbdbd; } .ds-avatar + .ds-avatar { margin-left: 4px; }"
+      "refersTo": "site-title-plate",
+      "description": "ヘッダーの番組名。黄色のプレートに載り、-1.5 度傾く。",
+      "html": "<div class=\"ds-header\"><div class=\"ds-plate\">Yarukinai.fm</div><div class=\"ds-desc\">雑談ベースで話すポッドキャスト</div></div>",
+      "css": ".ds-header { background: #4a5568; border-bottom: 3px solid rgba(0,0,0,0.87); padding: 40px 16px; } .ds-plate { display: inline-block; background: #ffe14d; color: rgba(0,0,0,0.87); font-size: 2.5rem; line-height: 1.4; padding: 0 14px; transform: rotate(-1.5deg); } .ds-desc { display: inline-block; margin-top: 12px; padding: 2px 10px; background: rgba(0,0,0,0.6); color: #fff; font-size: 0.9rem; }"
     },
     {
       "name": "Pagination Item",
       "kind": "nav",
       "refersTo": "pager-item",
-      "description": "ページ送りの各項目。白背景と細い枠線。",
-      "html": "<div class=\"ds-pager\"><a href=\"#\" class=\"ds-pager-item\">← 前のページ</a><a href=\"#\" class=\"ds-pager-item\">2</a><span class=\"ds-pager-item ds-pager-current\">3</span></div>",
-      "css": ".ds-pager { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; } .ds-pager-item { display: block; padding: 7px 16px; border: 1px solid #dee2e6; background: #fff; color: #495057; text-decoration: none; transition: all 0.2s ease; } .ds-pager-item:hover { background: #f8f9fa; border-color: #adb5bd; color: #212529; } .ds-pager-item:focus-visible { outline: 2px solid #1c3c7c; outline-offset: 2px; } .ds-pager-current, .ds-pager-current:hover { background: #007bff; border-color: #007bff; color: #fff; font-weight: 600; }"
+      "description": "ページ送りの項目。墨の縁、6px の角丸、現在ページは黄色。",
+      "html": "<div class=\"ds-pager\"><a href=\"#\" class=\"ds-pager-item\">1</a><span class=\"ds-pager-ellipsis\">…</span><a href=\"#\" class=\"ds-pager-item\">8</a><span class=\"ds-pager-item ds-pager-current\">9</span><a href=\"#\" class=\"ds-pager-item\">10</a></div>",
+      "css": ".ds-pager { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; } .ds-pager-item { display: block; min-width: 44px; padding: 7px 14px; border: 2px solid rgba(0,0,0,0.87); border-radius: 6px; background: #fff; color: rgba(0,0,0,0.87); text-align: center; text-decoration: none; } .ds-pager-item:hover { background: #fff6c2; } .ds-pager-item:focus-visible { outline: 3px solid #1c3c7c; outline-offset: 2px; } .ds-pager-current, .ds-pager-current:hover { background: #ffe14d; font-weight: 700; } .ds-pager-ellipsis { padding: 0 4px; }"
     },
     {
       "name": "Actor Avatar",
       "kind": "custom",
-      "refersTo": "card",
-      "description": "出演者の丸いプロフィール画像と名前。詳細ページでは 72px。",
+      "refersTo": "episode-panel",
+      "description": "出演者の丸いプロフィール画像。墨の 2px の縁。",
       "html": "<a href=\"#\" class=\"ds-actor\"><span class=\"ds-actor-image\"></span><br>tetuo41</a>",
-      "css": ".ds-actor { display: inline-block; text-align: center; color: #1c3c7c; text-decoration: none; font-size: 17px; line-height: 1.7; } .ds-actor-image { display: inline-block; width: 72px; height: 72px; border-radius: 50%; background: #bdbdbd; } .ds-actor:focus-visible { outline: 2px solid #1c3c7c; outline-offset: 2px; }"
-    },
-    {
-      "name": "Site Header",
-      "kind": "nav",
-      "refersTo": "site-header",
-      "description": "背景画像に暗幕を重ねた、白文字の番組名と説明。",
-      "html": "<header class=\"ds-header\"><div class=\"ds-header-overlay\"><h1 class=\"ds-header-title\">Yarukinai.fm</h1><div class=\"ds-header-desc\">やる気のない技術系ポッドキャスト</div></div></header>",
-      "css": ".ds-header { background: #4a5568; } .ds-header-overlay { background: rgba(0,0,0,0.3); padding: 96px 16px; } .ds-header-title { color: #fff; font-size: 2.5rem; font-weight: 500; line-height: 1.7; text-shadow: 0 1px 5px black; } .ds-header-desc { color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.7; }"
+      "css": ".ds-actor { display: inline-block; text-align: center; color: #1c3c7c; text-decoration: none; font-size: 17px; line-height: 1.7; } .ds-actor-image { display: inline-block; width: 72px; height: 72px; border: 2px solid rgba(0,0,0,0.87); border-radius: 50%; background: #bdbdbd; } .ds-actor:focus-visible { outline: 3px solid #1c3c7c; outline-offset: 3px; }"
     }
   ],
   "narrative": {
-    "northStar": "The Show Notes Library",
-    "overview": "グレーの地に、白いカードを 1 枚だけ置く。サイトの主役はデザインではなく、エピソードごとに積み上がるショーノート（話題と参照リンクの束）であり、UI は書架のように静かに内容を支える。\n\n影や強い装飾はなく、角丸も 2px に留まる。強調は色や大きな面ではなく、文字サイズと余白、そして濃紺のリンクで行う。",
+    "northStar": "The Annotated Zine",
+    "overview": "毎週のエピソードを、手描きのメモが入った小冊子のように見せる。枠（ヘッダー、番号、タイトル、パネルの縁）は蛍光ペンとマーカー文字で番組らしい気軽さを担い、読み物であるショーノートの本文は落ち着いた白い面と通常のサンセリフのまま保つ。\n\n世界観は「枠」に限り、読む領域には持ち込まない。パネルは 2px の墨の縁と 6px の角丸を持ち、最大 0.5 度だけ傾くが、タップ・フォーカスで真っ直ぐになる。",
     "keyCharacteristics": [
-      "背景はグレー、コンテンツは白いカードに集約する。",
-      "アクセントは濃紺のリンク 1 色のみ。",
-      "影を使わないフラットな面構成。ヘッダー文字の影だけが例外。",
-      "日本語本文を想定したシステムフォントと 17px / 行間 1.7 の読みやすい本文。",
-      "幅 960px 以下の 1 カラム構成で、スマートフォンでもそのまま読める。"
+      "白い面とグレーの地という既存のベースに、蛍光ペンの黄・ピンクを小さな印として足す。",
+      "マーカー書体は、サイト名・回番号・エピソードタイトルだけに使う。",
+      "一覧は墨の縁取りのパネル。最新回だけがやや大きく、パネル全体が 1 つのタップ領域。",
+      "ショーノートの本文は傾きも装飾もない、読みやすいカラム。",
+      "影を使わないフラットな面構成。"
     ],
     "rules": [
-      { "name": "The One Link Color Rule", "body": "色味を持つのはリンクの濃紺だけ。装飾目的でカラーを足さない。", "section": "colors" },
-      { "name": "The Gray Frame Rule", "body": "グレー（#eee）は常に外側、白（#fff）は常に内容。この内外の関係を逆転させない。", "section": "colors" },
-      { "name": "The Size-Over-Family Rule", "body": "階層はフォントを切り替えず、主にサイズで作る。太字は strong など意味のある箇所に限る。", "section": "typography" },
-      { "name": "The Flat-By-Default Rule", "body": "面はフラット。深さが必要なら影を足す前に、地と面の明度差を使う。", "section": "elevation" }
+      { "name": "The Highlighter Is a Mark Rule", "body": "黄とピンクは「印」としてだけ使う。広い面（背景、ヘッダー全体）を塗らない。", "section": "colors" },
+      { "name": "The One Link Color Rule", "body": "リンクとフォーカスは濃紺のみ。", "section": "colors" },
+      { "name": "The Calm Column Rule", "body": "ショーノートの本文には蛍光ペンの色もマーカー書体も傾きも持ち込まない。", "section": "colors" },
+      { "name": "The Marker-Only-Where-It-Speaks Rule", "body": "マーカー書体はサイト名・回番号・タイトルに限る。ナビゲーション、フッター、本文には使わない。", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "面はフラット。深さが必要でも、影ではなく縁取りで示す。", "section": "elevation" },
+      { "name": "The Straighten-On-Touch Rule", "body": "傾きは 0.5 度まで。hover / focus-within で必ず 0 度に戻る。", "section": "elevation" }
     ],
     "dos": [
-      "Do 色味はリンクの濃紺（#1c3c7c）だけに留め、新しいアクセントを足さない。",
-      "Do グレー地（#eee）の上に白いカードを置く構成を保つ。",
-      "Do 階層は主にサイズで作り、日本語システムフォントのままにする。",
-      "Do ショーノートの箇条書きとリンクの走査性（行間 1.7、下線）を最優先する。",
-      "Do スマートフォン幅（〜767px）で崩れないよう、1 カラムを基本にする。"
+      "Do 黄とピンクは回番号、タイトルの下線、現在ページなどの小さな印に限る。",
+      "Do 傾きは最大 0.5 度、hover / focus で必ず真っ直ぐに戻す。",
+      "Do ショーノートの本文は通常のサンセリフ・無装飾で、行間 1.7 を保つ。",
+      "Do パネル全体を 1 つのタップ領域にし、44px 以上の操作領域を確保する。",
+      "Do フォーカスは濃紺の 3px のリングで必ず見えるようにする。"
     ],
     "donts": [
-      "Don't カードに影や大きな角丸を付けない。フラットで軽い印象を保つ。",
-      "Don't ロゴ・ヘッダー画像・濃紺のリンク色を、ユーザーの確認なしに変えない（ブランドとして保持する方針）。",
-      "Don't Web フォントや装飾を足して、読み込みと情報密度を損なわない。",
-      "Don't ページネーションの青（#007bff）を他の箇所に広げない。統一する場合はリンク色との整理を先に決める。"
+      "Don't マーカー書体を本文・ナビゲーション・フッター見出しに広げない。",
+      "Don't 黄やピンクで広い面（背景、ヘッダー全体）を塗らない。",
+      "Don't パネルにオフセットの影や、2px 以上の傾きを付けない。",
+      "Don't ロゴ・ヘッダー写真・濃紺のリンク色を、ユーザーの確認なしに変えない。",
+      "Don't パネルをさらに別の白いカードの中に入れ子にしない。"
     ]
   }
 }
