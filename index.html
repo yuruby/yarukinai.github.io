@@ -47,7 +47,7 @@ layout: default
 
   <!-- Pagination -->
   {% if paginator.total_pages > 1 %}
-  <div class="pagination">
+  <nav class="pagination" aria-label="ページ送り">
     {% if paginator.previous_page %}
       <a href="{{ paginator.previous_page_path | relative_url }}" class="pagination__item">← 前のページ</a>
     {% endif %}
@@ -71,6 +71,6 @@ layout: default
     {% if paginator.next_page %}
       <a href="{{ paginator.next_page_path | relative_url }}" class="pagination__item">次のページ →</a>
     {% endif %}
-  </div>
+  </nav>
   {% endif %}
 </div>
