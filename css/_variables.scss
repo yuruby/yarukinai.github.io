@@ -8,6 +8,14 @@ $color-text-light-secondary: rgba(255, 255, 255, 0.7);
 $color-text-light-hint: rgba(255, 255, 255, 0.5);
 
 $font-family-monospace: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+// Marker face for the site name, episode numerals and titles only (see head.html); body text stays the system sans.
+$font-family-marker: "Yusei Magic", "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
+
+// Highlighter marks: small accents on top of the gray/white/navy base, never large fields.
+$color-highlight-yellow: #ffe14d;
+$color-highlight-yellow-soft: #fff6c2;
+$color-highlight-pink: #ff8fb1;
+$color-link: #1c3c7c;
 
 $width-gutter: 24px;
 $width-screen-extra-small-maximum: 767px;

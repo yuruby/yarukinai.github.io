@@ -12,6 +12,11 @@ a {
   }
 }
 
+a:focus-visible {
+  outline: 3px solid $color-link;
+  outline-offset: 3px;
+}
+
 body {
   background-color: #eee;
   color: $color-text-dark-primary;

@@ -3,14 +3,34 @@ layout: default
 ---
 
 <div class="container">
-  <div class="card">
+  <div class="episode-list">
     {% for post in paginator.posts %}
-      <article class="list-group-element">
+      {% comment %}Titles read "336. Name": the number becomes the badge, the rest stays the link text.{% endcomment %}
+      {% assign number = post.title | split: ". " | first %}
+      {% assign number_value = number | plus: 0 %}
+      {% if number_value > 0 %}
+        {% assign episode_name = post.title | remove_first: number | remove_first: ". " %}
+      {% else %}
+        {% assign number = "" %}
+        {% assign episode_name = post.title %}
+      {% endif %}
+      <article class="list-group-element{% if paginator.page == 1 and forloop.first %} is-latest{% endif %}">
+        {% if number != "" %}<span class="list-group-element-badge" aria-hidden="true">{{ number }}</span>{% endif %}
         <h2 class="list-group-element-heading">
-          <a href="{{ post.url }}">{{ post.title | escape }}</a>
+          <a href="{{ post.url }}">{% if number != "" %}<span class="visually-hidden">{{ number }}. </span>{% endif %}{{ episode_name | escape }}</a>
         </h2>
         <footer class="list-group-element-footer">
           {{ post.date | date: "%Y年%m月%d日" }}
+          {% if post.duration %}
+            {% comment %}duration is "HH:MM:SS" on newer episodes and "MM:SS" on older ones.{% endcomment %}
+            {% assign duration_parts = post.duration | split: ":" %}
+            {% if duration_parts.size == 3 %}
+              {% assign duration_minutes = duration_parts[0] | times: 60 | plus: duration_parts[1] %}
+            {% else %}
+              {% assign duration_minutes = duration_parts[0] %}
+            {% endif %}
+            ・ {{ duration_minutes }}分
+          {% endif %}
         </footer>
         <p>
           {{ post.description }}

@@ -4,24 +4,28 @@
   justify-content: center;
   margin: 2rem 0;
   padding: 1rem 0;
-  border-top: 1px solid #e9ecef;
 
   &__item {
-    margin-right: 4px;
-    margin-bottom: 4px;
-    text-decoration: none;
-    display: block;
-    padding: 7px 16px;
-    border: 1px solid #dee2e6;
     background-color: #fff;
-    color: #495057;
-    transition: all 0.2s ease;
+    border: 2px solid $color-text-dark-primary;
+    border-radius: 6px;
+    color: $color-text-dark-primary;
+    display: block;
+    margin-bottom: 8px;
+    margin-right: 8px;
+    min-width: 44px;
+    padding: 7px 14px;
+    text-align: center;
+    text-decoration: none;
 
     &:hover {
-      background-color: #f8f9fa;
-      border-color: #adb5bd;
+      background-color: $color-highlight-yellow-soft;
       text-decoration: none;
-      color: #212529;
+    }
+
+    &:focus-visible {
+      outline: 3px solid $color-link;
+      outline-offset: 2px;
     }
 
     &:last-child {
@@ -32,20 +36,17 @@
   &__ellipsis {
     background-color: transparent;
     border-color: transparent;
+    min-width: 0;
     padding-left: 4px;
     padding-right: 4px;
   }
 
   .current {
-    background-color: #007bff;
-    border-color: #007bff;
-    color: white;
-    font-weight: 600;
+    background-color: $color-highlight-yellow;
+    font-weight: 700;
 
     &:hover {
-      background-color: #0056b3;
-      border-color: #0056b3;
-      color: white;
+      background-color: $color-highlight-yellow;
     }
   }
 }
