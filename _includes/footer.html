@@ -18,9 +18,7 @@
             {{ site.title }} への感想や質問などは、X（旧Twitter）でハッシュタグ <a href="https://twitter.com/search?q=%23{{ site.hashtag }}" target="_blank">#{{ site.hashtag }}</a> をご利用ください。
           </div>
           <div class="footer-twitter">
-            <a class="twitter-share-button" href="https://twitter.com/intent/tweet?hashtags={{ site.hashtag }}&url={{ site.github.url }}">
-              ポスト
-            </a>
+            <a href="https://x.com/intent/post?hashtags={{ site.hashtag }}&url={{ site.github.url }}" target="_blank" rel="noopener">Xでポストする</a>
           </div>
         </section>
         <section class="column-small-4 footer-sections-element">
@@ -70,7 +68,6 @@
     </div>
   </div>
 </footer>
-<script type="text/javascript" async src="https://platform.twitter.com/widgets.js"></script>
 {% if page.layout == "article" %}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/2.23.4/mediaelement-and-player.min.js" integrity="sha384-X4KzQkOx/Zb7Eo7TY14MW5I1Rgd9+hReiagexz1Ab3ZgltsQ1q2VJDv2kYs45JaG" crossorigin="anonymous"></script>

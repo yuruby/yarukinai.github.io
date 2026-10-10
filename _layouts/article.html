@@ -70,11 +70,9 @@
             {{ content }}
           </section>
           <footer class="article-footer">
-            <ul class="list-group-element">
+            <ul class="article-footer-links">
               <li>
-                <a class="twitter-share-button" href="https://twitter.com/intent/tweet?hashtags={{ site.hashtag }}&url={{ site.github.url }}{{ page.url }}&text={{ page.title }}">
-                  ポスト
-                </a>
+                <a href="https://x.com/intent/post?hashtags={{ site.hashtag }}&url={{ site.github.url }}{{ page.url }}&text={{ page.title | uri_escape }}" target="_blank" rel="noopener">Xでポストする</a>
               </li>
               <li><a href="{{ site.fanclub }}">{{ site.title }} ファンクラブ</a></li>
               <li><a href="{{ site.online_store }}">{{ site.title }} オンラインストア</a></li>
