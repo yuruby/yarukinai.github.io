@@ -6,9 +6,9 @@ layout: default
   <div class="card">
     {% for post in paginator.posts %}
       <article class="list-group-element">
-        <h1 class="list-group-element-heading">
+        <h2 class="list-group-element-heading">
           <a href="{{ post.url }}">{{ post.title | escape }}</a>
-        </h1>
+        </h2>
         <footer class="list-group-element-footer">
           {{ post.date | date: "%Y年%m月%d日" }}
         </footer>
@@ -32,13 +32,19 @@ layout: default
       <a href="{{ paginator.previous_page_path | relative_url }}" class="pagination__item">← 前のページ</a>
     {% endif %}
 
+    {% comment %}Show the first and last page plus a window around the current one, with an ellipsis for each gap.{% endcomment %}
+    {% assign window = 2 %}
+    {% assign gap = window | plus: 1 %}
     {% for page in (1..paginator.total_pages) %}
+      {% assign distance = page | minus: paginator.page | abs %}
       {% if page == paginator.page %}
-        <span class="pagination__item current">{{ page }}</span>
+        <span class="pagination__item current" aria-current="page">{{ page }}</span>
       {% elsif page == 1 %}
         <a href="{{ '/' | relative_url }}" class="pagination__item">{{ page }}</a>
-      {% else %}
+      {% elsif page == paginator.total_pages or distance <= window %}
         <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}" class="pagination__item">{{ page }}</a>
+      {% elsif distance == gap %}
+        <span class="pagination__item pagination__ellipsis" aria-hidden="true">…</span>
       {% endif %}
     {% endfor %}
 

@@ -29,6 +29,13 @@
     }
   }
 
+  &__ellipsis {
+    background-color: transparent;
+    border-color: transparent;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
   .current {
     background-color: #007bff;
     border-color: #007bff;

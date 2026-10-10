@@ -1,11 +1,13 @@
 <header class="header">
   <div class="header-overlay">
     <div class="container">
-      <h1 class="header-heading">
+      {% comment %}Episode pages carry their own h1, so the site name is not a heading there.{% endcomment %}
+      {% if page.layout == "article" %}{% assign site_title_tag = "div" %}{% else %}{% assign site_title_tag = "h1" %}{% endif %}
+      <{{ site_title_tag }} class="header-heading">
         <a href="{{ site.github.url }}/">
           {{ site.title }}
         </a>
-      </h1>
+      </{{ site_title_tag }}>
       <div class="header-description">
         {{ site.description }}
       </div>

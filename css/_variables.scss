@@ -1,5 +1,7 @@
 $color-text-dark-primary: rgba(0, 0, 0, 0.87);
 $color-text-dark-secondary: rgba(0, 0, 0, 0.54);
+// 0.54 is 4.4:1 on the #eee page background; 0.6 clears WCAG AA (4.5:1) there
+$color-text-dark-secondary-on-gray: rgba(0, 0, 0, 0.6);
 $color-text-dark-hint: rgba(0, 0, 0, 0.38);
 $color-text-light-primary: #fff;
 $color-text-light-secondary: rgba(255, 255, 255, 0.7);
